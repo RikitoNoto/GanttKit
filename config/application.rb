@@ -15,5 +15,6 @@ module GanttKit
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    # config.action_controller.include_all_helper = false#これを使うとhelperが対応のコントローラのみで読み込まれる（deviseが使えなくなる？)
   end
 end
