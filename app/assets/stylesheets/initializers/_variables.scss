@@ -1,0 +1,68 @@
+//========common=========
+$main_color: #252D4F;
+
+// =======header=========
+$header_height: 50px;
+
+// =======sidebar=========
+$sidebar_width: 200px;
+$sidebar_color: #F9F9F9;
+$sidebar_user_area_height: 40px;
+$sidebar_inner_area: 10px;
+$sidebar_work_height: 50px;
+$sidebar_work_border_width: 6px;
+
+
+
+// =======main=========
+
+
+
+//========calendar_header=============
+$calendar_header_height: 40px;
+$calendar_header_margin: 10px;
+$calendar_header_border_width: 3px;
+
+//========calendar===================
+$project_name_width: 100px;
+$project_width: 150px;
+
+$calendar_progress_color: #84FA84;
+$calendar_schedule_color: #00FFFF;
+$calendar_conflict_color: #42FCC1;
+$calendar_progress_shadow_color: none;//#52B46D;
+$calendar_schedule_shadow_color: none;//#076DFF;
+$calendar_conflict_shadow_color: none;//#429ABA;
+$day_width: 25px;
+$table_row_height: 30px;
+
+// =======form=========
+$form_label_width: 150px;
+
+
+
+
+
+@mixin testBorder()
+{
+  border: solid black 1px;
+}
+
+@mixin font($color: #FFFFFF, $size: 16px, $weight: normal, $fontfamily: "Ryumin Light KL")
+{
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+  font-family: $fontfamily;
+
+}
+
+@mixin hover_button($color: #0F1220)
+{
+  &:hover
+  {
+      transition: 0.4s ease-in-out;
+      transition-property: background-color;
+      background-color: $color;
+  }
+}

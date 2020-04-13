@@ -1,0 +1,53 @@
+.header
+{
+  height: $header_height;
+  background-color: $main_color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  &__logo
+  {
+    @include font($color: white, $size: 20px, $weight: bold);
+    height: $header_height;
+    line-height: 50px;
+    margin-left: 10px;
+  }
+
+  &__buttons
+  {
+    display: flex;
+  }
+  
+  &__button
+  {
+    &--schedule
+    {
+
+    }
+    &--progress
+    {
+
+    }
+    &--logout
+    {
+
+    }
+  }
+
+}
+
+.iconButton
+{
+  &--header
+  {
+    height: 26px;
+    width: 26px;
+    border-radius: 10px;
+  }
+
+  &__icon--header
+  {
+    color: white;
+  }
+}

@@ -1,0 +1,79 @@
+.sidebar
+{
+  height: calc(100vh - #{$header_height} - 20px);
+  width: $sidebar_width;
+  background-color: $sidebar_color;
+  border-right: $main_color 1px solid;
+  &__works
+  {
+    height: 100%;
+    padding-top: 20px;
+  }
+
+
+  &__work
+  {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px 10px 0;
+    height: $sidebar_work_height;
+    width: $sidebar_width - $sidebar_inner_area * 2;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border-left: solid $sidebar_work_border_width $main_color;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
+    @include font($size:16px);
+    &:hover
+    {
+        transition: 0.5s ease-in-out;
+        background-color: #DDDDDD;
+    }
+    &__name
+    {
+      @include font($size:1.2em, $color: black);
+    }
+    &__enddate
+    {
+      display: block;
+      margin: 5px 0;
+      text-align: right;
+      @include font($size:0.8em, $color: black);
+    }
+  }
+
+  &__user
+  {
+    display: flex;
+    justify-content: space-between;
+    height: $sidebar_user_area_height;
+    @include font($weight: bold);
+    &__name
+    {
+      margin-left: $sidebar_inner_area;
+      line-height: $sidebar_user_area_height;
+    }
+    &__icons
+    {
+      display: flex;
+    }
+  }
+
+
+}
+
+.iconButton--sidebar
+{
+  @include font($size: 1.3em);
+  padding: 1px;
+  margin: 1px;
+  height: $sidebar_user_area_height - 4px;
+  width: $sidebar_user_area_height - 4px;
+  line-height: $sidebar_user_area_height - 4px;
+  border-radius: 12px;
+  &:hover
+  {
+      transition: 0.4s ease-in-out;
+      background-color: #C7C7C7;
+  }
+}
+

@@ -1,0 +1,5 @@
+.calendar_header
+  %p.calendar_header__title #{title}
+  .calendar_header__buttons
+    =link_to current_new_path, method: :get, class: "iconButton iconButton--calendar", title: button_title do
+      =icon('fas', 'plus-circle', class: "iconButton__icon--calendar")

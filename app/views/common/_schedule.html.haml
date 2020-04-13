@@ -1,0 +1,24 @@
+.calendar
+  %table.projects
+    %tr.projects__title
+      %th.projects__name.table_center
+        ="#{projects.model_name.to_s}"
+    -projects.each do |project|
+      %tr
+        %th.table_center.project__title
+          =link_to project.name, project.schedule_link(current_user: current_user)
+          .graph{style: "width: #{100*project.completeness}%;"}
+          -# %meter{value: project.completeness, class: "progress_bar"}
+  .scroll
+    %table.dates
+      -calendar_initialize(date: Date.today)
+      %tr
+        =create_months_row() do |colspan_size, month|
+          %th.table_center.dates__month{colspan: colspan_size, style: "width: #{colspan_size*25}px"} #{month}
+      %tr.dates__title
+        - create_days_row do |current_day|
+          %th.table_center.dates__day #{current_day.day}
+      - create_project_days_row(projects) do |project, y|
+        %tr
+          - itelate_days(project, y) do |time, klass, data|
+            %th{class: klass, data: data} #{time}

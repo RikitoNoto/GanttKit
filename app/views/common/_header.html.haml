@@ -1,0 +1,11 @@
+.header
+  =link_to "/" do
+    %p.header__logo GanttKit
+
+  .header__buttons
+    =link_to get_header_new_path("schedules"), method: :get, class: "iconButton iconButton--header", title: "create schedule" do
+      =icon('far', 'calendar-plus', class: "iconButton__icon--header")
+    =link_to get_header_new_path("progresses"), method: :get, class: "iconButton iconButton--header", title: "write progress" do
+      =icon('far', 'calendar-check', class: "iconButton__icon--header")
+    =link_to destroy_user_session_path, method: :delete, class: "iconButton iconButton--header", title: "logout" do
+      =icon('fas', 'sign-out-alt', class: "iconButton__icon--header")

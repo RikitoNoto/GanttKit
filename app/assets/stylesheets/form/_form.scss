@@ -1,0 +1,101 @@
+.form_image
+{
+    height: 100%;
+    width: 100%;  background-image: image_url('taskappLoginImage.jpg');
+    background-size:cover; 
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    height: 100vh;
+    position: relative;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__copyright
+    {
+        text-decoration: none;
+        @include font($color: gray, $size: 12px);
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.form
+{
+    max-width: 650px;
+    width: 50%;
+    margin: 20px auto;
+    padding: 30px 0;
+    background-color: rgba(200,200,200,0.5);
+
+    &__title
+    {
+        text-align: center;
+        margin-bottom: 20px;
+        @include font($color: #000, $size: 20px, $weight: bold)
+    }
+    
+    &__field
+    {
+        margin: 40px 30px;
+        padding: 0 20px;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__label
+        {
+            display: inline-block;
+            width: $form_label_width;
+            text-align: right;
+        }
+
+        &__input
+        {
+            box-shadow: 0px 1px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            height: 40px;
+            width: 300px;
+            font-size: 16px;
+
+            &--name
+            {
+            }
+            &--quantity
+            {
+                width: 300px - 60px;
+            }
+            &--unit
+            {
+                width: 60px;
+            }
+            &--time
+            {
+            }
+            &--start,&--end
+            {
+                width: 200px;
+            }
+        }
+    }
+
+    &__submit
+    {
+        display: block;
+        height: 40px;
+        width: 250px;
+        margin: 0 auto;
+        background-color: white;
+        font-size: 20px;
+        border: none;
+        border-bottom: solid 4px #CCCCCC;
+        cursor: pointer;
+        @include hover_button($color: #EEEEEE);
+        &:active
+        {
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+            border-bottom: none;
+        }
+    }
+}
