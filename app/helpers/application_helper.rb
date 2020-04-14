@@ -1,3 +1,3 @@
 module ApplicationHelper
-    include HeaderHelper
+    include PathHelper
 end
