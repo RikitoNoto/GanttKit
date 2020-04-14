@@ -22,4 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-https://www.lucidchart.com/documents/edit/d75268f5-58f7-4575-a0f4-05fcf3f12ae6/0_0?beaconFlowId=7A1529A81DFB06B6#?folder_id=home&browser=icon

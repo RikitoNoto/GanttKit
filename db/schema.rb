@@ -10,27 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_125907) do
+ActiveRecord::Schema.define(version: 2020_04_13_081302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "holidays", force: :cascade do |t|
-    t.integer "day", null: false
-    t.bigint "user_option_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_option_id"], name: "index_holidays_on_user_option_id"
-  end
-
-  create_table "user_options", force: :cascade do |t|
-    t.time "start", default: "2000-01-01 09:00:00", null: false
-    t.time "end", default: "2000-01-01 18:00:00", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_options_on_user_id"
-  end
 
   create_table "user_works", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -62,8 +45,6 @@ ActiveRecord::Schema.define(version: 2020_04_14_125907) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "holidays", "user_options"
-  add_foreign_key "user_options", "users"
   add_foreign_key "user_works", "users"
   add_foreign_key "user_works", "works"
 end
