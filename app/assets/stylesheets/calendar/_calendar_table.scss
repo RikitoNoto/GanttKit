@@ -1,0 +1,146 @@
+// @import "./calendar_methods";
+.schedule_area
+{
+  // background-image: image_url('nature_mountain.jpg');
+  // background-size:cover;
+  // background-repeat:no-repeat;
+  // background-attachment:fixed;
+}
+
+.table_center
+{
+    height: $table_row_height;
+    vertical-align: middle;
+} 
+
+.dates
+{
+    width: calc(100vw - #{$sidebar_width} - #{$project_width});
+
+    &__month
+    {
+        border: 1px solid black;
+    }
+
+    &__day
+    {
+        border-left: 1px solid #AAAAAA;
+        border-right: 1px solid #AAAAAA;
+    }
+}
+
+.current_select
+{
+    position: relative;
+    // background-color: #fbf6f5;
+    &::after
+    {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        content: "";
+        border: black solid 2px;
+    }
+}
+
+.calendar
+{
+    width: calc(100vw - #{$sidebar_width} - 20px);
+    margin-left: 20px;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 0;
+    &__schedule
+    {
+        @include font($color: #00F);
+        &--start,
+        &--middle,
+        &--end
+        {
+        border-right: none;
+        border-left: none;
+        position: relative;
+        }
+
+        // &--start
+        // {
+        // @include calendar_before_border($top: true, $bottom: true, $left: true)
+        // }
+
+        // &--middle
+        // {
+        // @include calendar_before_border($top: true, $bottom: true)
+        // }
+
+        // &--end
+        // {
+        // @include calendar_before_border($top: true, $bottom: true, $right: true)
+        // }
+
+    }
+
+    &__progress
+    {
+        @include font($color: #0F0);
+        &--start,
+        &--middle,
+        &--end
+        {
+            border-right: none;
+            border-left: none;
+            background-color: $calendar_progress_color;
+        }
+    }
+}
+
+.scroll
+{
+    overflow: scroll;
+}
+
+.projects_table
+{
+    width: $project_width;
+    &__name
+    {
+        height: $table_row_height * 2 + 1px;//1pxはボーダのサイズ
+        min-width: $project_name_width;
+        box-sizing: border-box;
+        border-bottom: 1px solid black;
+    }
+}
+
+.graph
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: aliceblue;
+    max-width: 100%;
+    z-index: -1;
+}
+
+// メータのスタイル
+.project__title
+{
+    position: relative;
+    width: $project_name_width;
+}
+
+.progress_bar
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}

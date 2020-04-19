@@ -44,6 +44,7 @@
   {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: $sidebar_user_area_height;
     @include font($weight: bold);
     &__name
@@ -54,25 +55,18 @@
     &__icons
     {
       display: flex;
+      &__link
+      {
+        @include font($size: 1.3em);
+        padding: 1px;
+        margin: 1px;
+        height: $sidebar_user_area_height - 4px;
+        width: $sidebar_user_area_height - 4px;
+        line-height: $sidebar_user_area_height - 4px;
+        border-radius: 12px;
+        @include iconButton($color: #C7C7C7)
+
+      }
     }
   }
-
-
 }
-
-.iconButton--sidebar
-{
-  @include font($size: 1.3em);
-  padding: 1px;
-  margin: 1px;
-  height: $sidebar_user_area_height - 4px;
-  width: $sidebar_user_area_height - 4px;
-  line-height: $sidebar_user_area_height - 4px;
-  border-radius: 12px;
-  &:hover
-  {
-      transition: 0.4s ease-in-out;
-      background-color: #C7C7C7;
-  }
-}
-

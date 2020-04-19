@@ -1,4 +1,10 @@
-.iconButton
+@mixin icon($color: $main_color, $size: 24px)
+{
+    color: $color;
+    font-size: $size;
+}
+
+@mixin iconButton($color: #0F1220, $size: 24px, $icon_color: $main_color)
 {
     display: block;
     text-align: center;
@@ -8,15 +14,10 @@
     &:hover
     {
         transition: 0.4s ease-in-out;
-        background-color: #0F1220;
+        background-color: $color;
     }
-
-}
-
-@mixin icon($hoverColor: $main_color, $size: 16px, $weight: normal, $fontfamily: "Ryumin Light KL")
-{
-    color: $main_color;
-    font-size: $size;
-    font-weight: $weight;
-    font-family: $fontfamily;
+    &__icon
+    {
+        @include icon($color: $icon_color, $size: $size)
+    }
 }

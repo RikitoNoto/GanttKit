@@ -1,0 +1,6 @@
+.calendar_header
+  %p.calendar_header__title #{title}
+  .calendar_header__buttons
+    =link_to current_new_path, method: :get, class: "calendar_header__buttons__button", title: button_title do
+      -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new
+      =icon('fas', 'plus-circle', class: "calendar_header__buttons__button__icon")

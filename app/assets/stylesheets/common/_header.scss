@@ -18,37 +18,13 @@
   &__buttons
   {
     display: flex;
-  }
-  
-  &__button
-  {
-    &--schedule
+    &__button
     {
+      height: 26px;
+      width: 26px;
+      border-radius: 10px;
+      @include iconButton($icon_color: white)
 
     }
-    &--progress
-    {
-
-    }
-    &--logout
-    {
-
-    }
-  }
-
-}
-
-.iconButton
-{
-  &--header
-  {
-    height: 26px;
-    width: 26px;
-    border-radius: 10px;
-  }
-
-  &__icon--header
-  {
-    color: white;
   }
 }

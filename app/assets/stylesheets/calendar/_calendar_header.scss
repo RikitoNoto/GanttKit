@@ -1,0 +1,24 @@
+.calendar_header
+{
+  margin: $calendar_header_margin;
+  height: $calendar_header_height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  &__title
+  {
+    @include font($color: black, $size: 20px, $weight: bold);
+  }
+
+  &__buttons
+  {
+    display: flex;
+    &__button
+    {
+      border-radius: 10px;
+      margin-right: 20px;
+      @include iconButton($color: #DDDDDD)
+    }
+  }
+}

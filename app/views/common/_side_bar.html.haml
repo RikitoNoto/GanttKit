@@ -3,12 +3,12 @@
     =link_to user_works_path(current_user.id), class: "sidebar__user__name" do
       #{current_user.name}
     .sidebar__user__icons
-      =link_to new_user_work_path(current_user.id), class: "iconButton iconButton--sidebar", title: "new work" do
-        =icon('fas', 'folder-plus')
-      =link_to edit_user_user_option_path(current_user.id), class: "iconButton iconButton--sidebar", title: "option" do
-        =icon('fas', 'cog')
+      =link_to new_user_work_path(current_user.id), class: "sidebar__user__icons__link", title: "new work" do
+        =icon('fas', 'folder-plus', class: "sidebar__user__icons__link__icon")
+      =link_to edit_user_user_option_path(current_user.id), class: "sidebar__user__icons__link", title: "option" do
+        =icon('fas', 'cog', class: "sidebar__user__icons__link__icon")
   .sidebar__works
-    -current_user.works.each do |work|
+    -# -current_user.works.each do |work|
       =link_to work_tasks_path(work.id), class: "sidebar__work" do
         %p.sidebar__work__name
           =work.name

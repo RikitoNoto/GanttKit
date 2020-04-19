@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 2020_04_14_125907) do
 
   create_table "works", force: :cascade do |t|
     t.string "name"
-    t.datetime "start"
-    t.datetime "end"
+    t.date "start_date"
+    t.date "end_date"
+    t.time "start_time"
+    t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
