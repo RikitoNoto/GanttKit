@@ -1,0 +1,6 @@
+=render partial: "common/header"
+.main
+    =render partial: "common/side_bar"
+    .schedule_area
+        =render partial: "common/calendar_header", locals: {title: "#{@work.name}'s tasks", button_title: "Add Task"}
+        =render partial: "common/calendar", locals: {projects: @tasks, user: @user}

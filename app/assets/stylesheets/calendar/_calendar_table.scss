@@ -104,7 +104,7 @@
 
 .projects_table
 {
-    width: $project_width;
+    min-width: $project_width;
     &__name
     {
         height: $table_row_height * 2 + 1px;//1pxはボーダのサイズ

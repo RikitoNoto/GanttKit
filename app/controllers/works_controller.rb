@@ -1,8 +1,8 @@
 class WorksController < ApplicationController
     before_action :set_calendar_edge_days, only: [:index]
-    
+    before_action :set_user, only: [:index]
+
     def index
-        @user = User.find(params[:user_id])
         @works = @user.works
     end
 
@@ -14,7 +14,7 @@ class WorksController < ApplicationController
         @work = Work.new(work_params)
         if @work.save
             @work.users << current_user
-            redirect_to "/"#work_tasks_path(@work)
+            redirect_to user_works_path(current_user)
         else
             render :new
         end

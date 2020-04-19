@@ -1,0 +1,40 @@
+=render partial: "common/header"
+.main
+    =render partial: "common/side_bar"
+    .form.form--add_form
+        %p.form__title Add Task Form
+        =form_with model: @task, url: work_tasks_path(@work), local: true do |f|
+            .form__field
+                =f.label :name, "TaskName：", class: "form__field__label"
+                =f.text_field :name, list: "taskNames", autocomplete: "off", placeholder: "Input the name of task", class: "form__field__input form__field__input--name", id: "task_name_form"
+                %datalist#taskNames
+                    -@tasks.each do |task|
+                        %option{value: task.name}
+
+
+            .form__field
+                =f.label :quantity, "Quantity：", class: "form__field__label"
+                %span
+                    =f.number_field :quantity, class: "form__field__input form__field__input--quantity"
+                    =f.text_field :unit, list: "unitlist", title: "unit", class: "form__field__input form__field__input--unit"
+                    %datalist#unitlist
+                        -# -@units.each do |unit|
+                        -#     %option{value: unit.unit}
+
+            .form__field
+                =f.label :time, "SpendTime：", class: "form__field__label"
+                =f.number_field :time, step: "0.01", class: "form__field__input form__field__input--time"
+
+            .form__field
+                =f.label :start_date, "StartDate：", class: "form__field__label"
+                %span.form__field--date_time
+                    =f.date_field :start_date, class: "form__field__input form__field__input--date"
+                    =f.time_field :start_time, class: "form__field__input form__field__input--time"
+
+            .form__field
+                =f.label :end_date, "EndDate：", class: "form__field__label"
+                %span.form__field--date_time
+                    =f.date_field :end_date, class: "form__field__input form__field__input--date"
+                    =f.time_field :end_time, class: "form__field__input form__field__input--time"
+
+            =f.submit "Creat Task", class: "form__submit", data: {disable: {with: "Please Wait"}}

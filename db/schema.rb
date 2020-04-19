@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_125907) do
+ActiveRecord::Schema.define(version: 2020_04_19_071506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 2020_04_14_125907) do
     t.index ["user_option_id"], name: "index_holidays_on_user_option_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.float "quantity"
+    t.string "unit"
+    t.date "start_date"
+    t.time "start_time"
+    t.date "end_date"
+    t.time "end_time"
+    t.bigint "work_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["work_id"], name: "index_tasks_on_work_id"
+  end
+
   create_table "user_options", force: :cascade do |t|
     t.time "start", default: "2000-01-01 09:00:00", null: false
     t.time "end", default: "2000-01-01 18:00:00", null: false
@@ -30,6 +44,15 @@ ActiveRecord::Schema.define(version: 2020_04_14_125907) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_options_on_user_id"
+  end
+
+  create_table "user_tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_user_tasks_on_task_id"
+    t.index ["user_id"], name: "index_user_tasks_on_user_id"
   end
 
   create_table "user_works", force: :cascade do |t|
@@ -65,7 +88,10 @@ ActiveRecord::Schema.define(version: 2020_04_14_125907) do
   end
 
   add_foreign_key "holidays", "user_options"
+  add_foreign_key "tasks", "works"
   add_foreign_key "user_options", "users"
+  add_foreign_key "user_tasks", "tasks"
+  add_foreign_key "user_tasks", "users"
   add_foreign_key "user_works", "users"
   add_foreign_key "user_works", "works"
 end

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   has_many :user_works
   has_many :works, through: :user_works
+  has_many :user_tasks
+  has_many :tasks, through: :user_tasks
   has_one :user_option, dependent: :destroy
 
   validates :name, presence: true

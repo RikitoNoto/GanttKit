@@ -9,7 +9,13 @@ module PathHelper
         end
     end
 
-    def current_new_path#現在の位置から新規作成のパスを作成する。
-        "#{request.path_info}/new"#user/1/works/ならuser/1/works/new
+    def current_new_path(user: "ignore")#現在の位置から新規作成のパスを作成する。
+        url = "#{request.path_info}/new"#users/1/works/ならusers/1/works/new
+        case user
+        when "ignore"#userをurlに含めないなら(デフォルト)
+            return url.sub(/\/users\/\d+/, "")
+        when "include"
+            return url #userを無視しないオプションなら
+        end
     end
 end
