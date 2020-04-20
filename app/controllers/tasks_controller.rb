@@ -4,8 +4,14 @@ class TasksController < ApplicationController
     before_action :set_work, only: [:index, :new, :create]
 
     def index
-        @work = Work.find(params[:work_id])
-        @tasks = @user.tasks.where(work_id: params[:work_id])
+        respond_to do |format|
+            format.html do
+                @tasks = @user.tasks.where(work_id: params[:work_id])
+            end
+            format.json do
+                @tasks = @work.tasks
+            end
+        end
     end
 
     def new
@@ -27,6 +33,6 @@ class TasksController < ApplicationController
     private
 
     def task_params
-        params.require(:task).permit(:name, :quantity, :unit, :start_date, :start_time, :end_date, :end_time)
+        params.require(:task).permit(:name, :quantity, :unit, :time, :start_date, :start_time, :end_date, :end_time)
     end
 end

@@ -3,9 +3,9 @@
     %p.header__logo GanttKit
 
   .header__buttons
-    =link_to get_header_new_path("schedules"), method: :get, class: "header__buttons__button", title: "create schedule" do
+    =link_to new_plan_path(work_id: @work&.id), method: :get, class: "header__buttons__button", title: "create plan" do
       =icon('far', 'calendar-plus', class: "header__buttons__button__icon")
-    =link_to get_header_new_path("progresses"), method: :get, class: "header__buttons__button", title: "write progress" do
+    =link_to new_progress_path(work_id: @work&.id), method: :get, class: "header__buttons__button", title: "write progress" do
       =icon('far', 'calendar-check', class: "header__buttons__button__icon")
     =link_to destroy_user_session_path, method: :delete, class: "header__buttons__button", title: "logout" do
       =icon('fas', 'sign-out-alt', class: "header__buttons__button__icon")

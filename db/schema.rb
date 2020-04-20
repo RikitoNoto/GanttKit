@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_071506) do
+ActiveRecord::Schema.define(version: 2020_04_20_015756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,41 @@ ActiveRecord::Schema.define(version: 2020_04_19_071506) do
     t.index ["user_option_id"], name: "index_holidays_on_user_option_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.float "quantity", null: false
+    t.float "time", null: false
+    t.date "start_date", null: false
+    t.time "start_time", null: false
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_plans_on_task_id"
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.float "quantity", null: false
+    t.time "float", null: false
+    t.date "start_date", null: false
+    t.time "start_time", null: false
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_progresses_on_task_id"
+    t.index ["user_id"], name: "index_progresses_on_user_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
-    t.string "name"
-    t.float "quantity"
+    t.string "name", null: false
+    t.float "quantity", null: false
     t.string "unit"
-    t.date "start_date"
-    t.time "start_time"
-    t.date "end_date"
-    t.time "end_time"
+    t.float "time"
+    t.date "start_date", null: false
+    t.time "start_time", null: false
+    t.date "end_date", null: false
+    t.time "end_time", null: false
     t.bigint "work_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -78,16 +105,20 @@ ActiveRecord::Schema.define(version: 2020_04_19_071506) do
   end
 
   create_table "works", force: :cascade do |t|
-    t.string "name"
-    t.date "start_date"
-    t.date "end_date"
-    t.time "start_time"
-    t.time "end_time"
+    t.string "name", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "holidays", "user_options"
+  add_foreign_key "plans", "tasks"
+  add_foreign_key "plans", "users"
+  add_foreign_key "progresses", "tasks"
+  add_foreign_key "progresses", "users"
   add_foreign_key "tasks", "works"
   add_foreign_key "user_options", "users"
   add_foreign_key "user_tasks", "tasks"

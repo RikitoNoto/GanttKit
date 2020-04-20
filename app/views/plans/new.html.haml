@@ -1,0 +1,4 @@
+=render partial: "common/header"
+.main
+    =render partial: "common/side_bar"
+    =render partial: "calendar/calendar_form", locals: {resource: @plan, date_range: {min: Time.now}}

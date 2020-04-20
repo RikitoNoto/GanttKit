@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :works, through: :user_works
   has_many :user_tasks
   has_many :tasks, through: :user_tasks
+  has_many :plans
   has_one :user_option, dependent: :destroy
 
   validates :name, presence: true

@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    def set_user
+    def set_user#基本@userでview作成している。（多人数仕様にできるように）現状は@userにcurrent_userを入れてる
         if params[:user_id]
             @user = User.find(params[:user_id])
         else
@@ -28,8 +28,12 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    def set_work
-        @work = Work.find(params[:work_id])
+    def set_work#ヘッダーでworkparamsがあったりなかったりするのでエラーが起きないように分岐を作っている。
+        if params[:work_id]
+            @work = Work.find(params[:work_id])
+        else
+            @work = nil#ここではnilだがtask#indexでユーザーの最初のワークを入れる
+        end
     end
 
     def set_calendar_edge_days#カレンダーの開始と終了、基点日をインスタンス変数に入れる

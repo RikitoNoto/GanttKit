@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     resource :user_option, only: [:edit]
   end
   resources :works, only: [:new, :create] do
-    resources :tasks, only: [:new, :create]
+    resources :tasks, only: [:index, :new, :create]#ここのindexはカレンダーフォームのajax用。通常はユーザとワークにネストされたほうを使用する。
   end
-  root to: "users#index"
+
+  resources :plans, only: [:new, :create]
+  resources :progresses, only: [:new, :create]
+  root to: "works#index"
 end

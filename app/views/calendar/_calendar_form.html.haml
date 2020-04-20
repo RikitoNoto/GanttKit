@@ -1,0 +1,43 @@
+.form.form--add_form#calendar_form_for_js
+    %p.form__title
+        Add #{resource.model_name.to_s} Form
+    = form_with model: resource, local: true do |f|
+        .form__field
+            -# planとprogressはworkとのアソシエーションがないのでサーバー側では使用しない
+            %label.form__field__label{for: "work_selector"} Work Name：
+            = select_tag( :work, options_for_select(current_user.works.map{|work| [work.name, work.id]}, selected: @work&.id), {class: "form__field__input work_selector_for_js"})
+
+        .form__field
+            = f.label :task_id, "Task Name：", class: "form__field__label"
+            = f.select :task_id, nil, {}, {class: "form__field__input task_selector_for_js"} do
+                - @work&.tasks&.each do |task|
+                    %option{value: task.id, selected: resource.task&.id == task.id} #{task.name}
+
+        .form__field
+            = f.label :quantity, "Quantity：", class: "form__field__label"
+            %span
+                = f.number_field :quantity, class: "form__field__input form__field__input--quantity"
+                %span.unit_of_task
+                    - if @work&.tasks&.first&.unit
+                        = @work&.tasks&.first.unit
+                    -else
+                        page
+
+        .form__field
+            = f.label :time, "SpendTime：", class: "form__field__label"
+            %span
+                = f.number_field :time, step: "0.01", class: "form__field__input form__field__input--time"
+                H
+
+        .form__field
+            = f.label :start_date, "StartDate：", class: "form__field__label"
+            %span.form__field--date_time
+                = f.date_field :start_date, class: "form__field__input form__field__input--date", min: date_range[:min], max: date_range[:max]
+                = f.time_field :start_time, class: "form__field__input form__field__input--time"
+
+
+        -# .form__field
+            -#   = f.label :end, "EndTime：", class: "form__field__label"
+            -#   = f.datetime_field :end, class: "form__field__input form__field__input--end"
+
+        = f.submit "Create #{resource.model_name.to_s}", class: "form__submit", data: {disable: {with: "Please Wait"}}

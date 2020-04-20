@@ -9,7 +9,7 @@
         =icon('fas', 'cog', class: "sidebar__user__icons__link__icon")
   .sidebar__works
     -current_user.works.each do |work|
-      =link_to user_work_tasks_path(@user, work), class: "sidebar__work" do
+      =link_to user_work_tasks_path(current_user, work), class: "sidebar__work" do
         %p.sidebar__work__name
           =work.name
         %small.sidebar__work__enddate
