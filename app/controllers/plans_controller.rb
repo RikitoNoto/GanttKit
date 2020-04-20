@@ -11,7 +11,11 @@ class PlansController < ApplicationController
         if @plan.save
             redirect_to user_work_tasks_path(current_user, @plan.task)
         else
-            @work = current_user.works.first
+            if @plan.task
+                @work = @plan.task.work
+            else
+                @work = current_user.works.first
+            end
             render :new
         end
     end

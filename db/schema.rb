@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_015756) do
 
   create_table "progresses", force: :cascade do |t|
     t.float "quantity", null: false
-    t.time "float", null: false
+    t.float "time", null: false
     t.date "start_date", null: false
     t.time "start_time", null: false
     t.bigint "user_id", null: false
