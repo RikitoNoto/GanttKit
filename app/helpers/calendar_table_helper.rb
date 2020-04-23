@@ -60,11 +60,45 @@ module CalendarTableHelper
         return nil
     end
 
+    
+    def create_days_row_with_project(project, user, y)
+        #内部的にカレンダーの日付繰り返しを行う。(プロジェクトの行も日付分列があるため)
+        #このメソッドはブロック変数でx座標を返してくれる
+        create_days_row do |current_day, x|
+            detail_of_day = project.detail_of_date(current_day, user)#{total_time: 合計時間, status: {ステータス}}
+            #taskとworkのインスタンスメソッド
+            #その日のユーザーの詳細を返す。
+
+            point = [x, y]#座標の定義
+            yield(detail_of_day[:total_time], point, detail_of_day[:status])
+        end
+    end
+    # 〇total_time
+    # その日の出力される合計時間
+    # progressが優先で表示される
+    # 〇point
+    # 入力される場所の座標
+    # [x,y]の書式で出力する
+    # 〇status
+    # ハッシュの配列になっており、中にはplanとprogressで4種類のステータスのうち1つずつが入っている
+    # start: 開始日
+    # end: 終了日
+    # middle: 稼働日
+    # start-end: その日に開始して終了
+    # 例)[{plan: start}, {progress: end}] 
+
+    # カレンダーのボーダーをこれで制御する
+    # start: left-top-bottom
+    # end: right-top-bottom
+    # middle: top-bottom
+    # start-end: all
     private
 
 #=================================================================
 
 #================================行===============================
+
+    public
 def create_project_days_row(projects)
     projects.each_with_index do |project, i|#タスクの回数分行があるのでタスクの回数繰り返す。
         x_cell = 1
