@@ -35,6 +35,8 @@ $calendar_schedule_shadow_color: none;//#076DFF;
 $calendar_conflict_shadow_color: none;//#429ABA;
 $day_width: 25px;
 $table_row_height: 30px;
+$light_border: 1px solid #AAAAAA;
+$dark_border: 1px solid #555555;
 
 // =======form=========
 $form_label_width: 150px;
@@ -64,5 +66,15 @@ $form_label_width: 150px;
       transition: 0.4s ease-in-out;
       transition-property: background-color;
       background-color: $color;
+  }
+}
+
+@mixin cells_border()
+{
+  &[data-status='middle']
+  {
+    border: none;
+    border-top: $dark_border;
+    border-bottom: $dark_border;
   }
 }

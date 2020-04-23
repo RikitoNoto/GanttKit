@@ -20,5 +20,6 @@
                     %th.table_center.dates__day #{current_day.day}
             - create_project_days_row(projects) do |project, y|
                 %tr
-        -#           - itelate_days(project, y) do |time, klass, data|
-        -#             %th{class: klass, data: data} #{time}
+                    - create_days_row_with_project(project, user, y) do |total_time, point, status|#右から合計時間、座標、ステータス
+
+                        %th{class: "table_center dates__day calendar__days_cell", data: status} #{total_time}
