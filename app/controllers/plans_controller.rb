@@ -9,7 +9,7 @@ class PlansController < ApplicationController
     def create
         @plan = Plan.new(plan_params.merge(user_id: current_user.id))
         if @plan.save
-            redirect_to user_work_tasks_path(current_user, @plan.task)
+            redirect_to user_work_tasks_path(current_user, @plan.task.work)
         else
             if @plan.task
                 @work = @plan.task.work

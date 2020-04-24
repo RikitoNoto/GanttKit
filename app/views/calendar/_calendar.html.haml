@@ -22,4 +22,4 @@
                 %tr
                     - create_days_row_with_project(project, user, y) do |total_time, point, status|#右から合計時間、座標、ステータス
 
-                        %th{class: "table_center dates__day calendar__days_cell", data: status} #{total_time}
+                        %th{class: "table_center dates__day calendar__days_cell", data: status} #{total_time&.to_i}
