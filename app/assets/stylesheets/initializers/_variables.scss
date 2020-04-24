@@ -36,7 +36,10 @@ $calendar_conflict_shadow_color: none;//#429ABA;
 $day_width: 25px;
 $table_row_height: 30px;
 $light_border: 1px solid #AAAAAA;
-$dark_border: 1px solid #555555;
+$dark_border: 2px solid #555555;
+$calendar_cell_background_color: #C5D4E1;
+$calendar_cell_background_color--plan: #F9F0CE;
+$calendar_cell_background_color--progress: #A6EAA6;
 
 // =======form=========
 $form_label_width: 150px;
@@ -71,10 +74,36 @@ $form_label_width: 150px;
 
 @mixin cells_border()
 {
-  &[data-status='middle']
+  &[data-status]
   {
     border: none;
     border-top: $dark_border;
     border-bottom: $dark_border;
+    background-color: $calendar_cell_background_color;
+  }
+  &[data-status='middle']
+  {
+    //middleの時の設定をここに入れる
+  }
+  &[data-status='start']
+  {
+    border-left: $dark_border;
+  }
+  &[data-status='end']
+  {
+    border-right: $dark_border;
+  }
+  &[data-status='start-end']
+  {
+    border-right: $dark_border;
+    border-left: $dark_border;
+  }
+  &[data-plan-status]
+  {
+    background-color: $calendar_cell_background_color--plan;
+  }
+  &[data-progress-status]
+  {
+    background-color: $calendar_cell_background_color--progress;
   }
 }
