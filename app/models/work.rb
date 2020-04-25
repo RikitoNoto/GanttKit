@@ -20,6 +20,7 @@ class Work < ApplicationRecord
     def get_the_days_task(date, user)
         tasks = []
         self.tasks.each do |task|
+            #TODO: このユーザーチェックでN+1問題が発生している
             next unless task.users.include?(user)#もしユーザーに関係のないタスクならスルーする。
             if task.start_date == date && task.end_date == date
                 tasks << {task: task, status: "start-end"}

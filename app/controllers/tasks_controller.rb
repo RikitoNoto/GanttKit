@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     def index
         respond_to do |format|
             format.html do
-                @tasks = @user.tasks.where(work_id: params[:work_id])
+                @tasks = @user.tasks.where(work_id: params[:work_id]).includes(:progresses, :plans)
             end
             format.json do
                 @tasks = @work.tasks

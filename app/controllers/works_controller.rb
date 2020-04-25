@@ -3,7 +3,7 @@ class WorksController < ApplicationController
     before_action :set_user, only: [:index]
 
     def index
-        @works = @user.works
+        @works = @user.works.includes(:tasks)
     end
 
     def new

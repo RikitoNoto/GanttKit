@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   has_many :user_tasks
   has_many :users, through: :user_tasks
   has_many :plans
-  has_many :progress
+  has_many :progresses
   belongs_to :work
 
   validates :name, presence: true
@@ -19,6 +19,7 @@ class Task < ApplicationRecord
   #日付とユーザーを受け取りその日の合計時間、ステータスを返す。(ステータスはcalendar_table_helperに詳細を記載)
   #workにも同名メソッドがあり(helperを使いまわしているので同名の必要あり)
   def detail_of_date(date, user)
+    #TODO: N+1問題が発生している
     plans = Plan.thisday(date, user, self)
     progresses = Progress.thisday(date, user, self)
     plans_total_time = total_time(plans, when_zero: nil)
