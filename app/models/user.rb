@@ -9,10 +9,24 @@ class User < ApplicationRecord
   has_many :plans
   has_many :progress
   has_one :user_option, dependent: :destroy
+  accepts_nested_attributes_for :user_option
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  # validates :email, presence: true, uniqueness: true
+  # validates :password, presence: true
+  # validates :password_confirmation, presence: true
+  #上記3つはdeviseのデフォルトでバリデーションかけてくれている。
+  #パスワードのバリデーションをかけると、実際に存在していないカラムなのでエラーがおきてしまう
 
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    result = update(params, *options)
+    clean_up_passwords
+    return result
+  end
 end

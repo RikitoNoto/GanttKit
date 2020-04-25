@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     protected
 
     def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:name, user_option_attributes: [:start, :end]])
     end
 
     def calendar_base_point#カレンダーを表示するための基点をparamsの中身を確認して返す。
