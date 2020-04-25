@@ -30,6 +30,9 @@
     &__name
     {
       @include font($size:1.2em, $color: black);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     &__enddate
     {

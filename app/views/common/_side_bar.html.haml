@@ -5,7 +5,7 @@
     .sidebar__user__icons
       =link_to new_work_path, class: "sidebar__user__icons__link", title: "new work" do
         =icon('fas', 'folder-plus', class: "sidebar__user__icons__link__icon")
-      =link_to edit_user_user_option_path(current_user.id), class: "sidebar__user__icons__link", title: "option" do
+      =link_to edit_user_registration_path, class: "sidebar__user__icons__link", title: "option" do
         =icon('fas', 'cog', class: "sidebar__user__icons__link__icon")
   .sidebar__works
     -current_user.works.each do |work|
