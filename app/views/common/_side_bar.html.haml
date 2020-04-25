@@ -8,7 +8,7 @@
       =link_to edit_user_registration_path, class: "sidebar__user__icons__link", title: "option" do
         =icon('fas', 'cog', class: "sidebar__user__icons__link__icon")
   .sidebar__works
-    -current_user.works.each do |work|
+    -current_user.works.order(created_at: :asc).each do |work|
       =link_to user_work_tasks_path(current_user, work), class: "sidebar__work" do
         %p.sidebar__work__name
           =work.name

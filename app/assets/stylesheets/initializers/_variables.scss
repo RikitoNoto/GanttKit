@@ -1,5 +1,6 @@
 //========common=========
 $main_color: #252D4F;
+$post_it_border_width: 6px;
 
 // =======header=========
 $header_height: 50px;
@@ -10,7 +11,6 @@ $sidebar_color: #F9F9F9;
 $sidebar_user_area_height: 40px;
 $sidebar_inner_area: 10px;
 $sidebar_work_height: 50px;
-$sidebar_work_border_width: 6px;
 
 
 
@@ -70,6 +70,21 @@ $form_label_width: 150px;
       transition-property: background-color;
       background-color: $color;
   }
+}
+
+@mixin post_it($height: 70px, $width: 200px, $padding_margin: false)
+{
+  @if $padding_margin
+  {
+    margin: 0 auto 20px;
+    padding: 10px 10px 0;
+  }
+  height: $height;
+  width: $width;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  border-left: solid $post_it_border_width $main_color;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
 }
 
 @mixin cells_border()

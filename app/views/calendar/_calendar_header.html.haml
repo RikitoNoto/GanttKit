@@ -4,3 +4,18 @@
     =link_to current_new_path, method: :get, class: "calendar_header__buttons__button", title: button_title do
       -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new
       =icon('fas', 'plus-circle', class: "calendar_header__buttons__button__icon")
+
+    -# 以下選択url。部分テンプレート呼び出しでハッシュを入れることでよびだし。
+    -# other_path[アクション名][url]のような形で受け取るので呼び出したくないときは部分テンプレートで空のハッシュを入れないようにする。
+    -# 構文は other_path: {アクション名: {url: URL, text: ホバーしたときに表示する文字}}
+    - if other_path[:show]
+      =link_to other_path[:show][:path], method: :get, class: "calendar_header__buttons__button", title: other_path[:show][:text] do
+        =icon('fas', 'book', class: "calendar_header__buttons__button__icon")
+
+    - if other_path[:edit]
+      =link_to other_path[:edit][:path], method: :get, class: "calendar_header__buttons__button", title: other_path[:edit][:text] do
+        =icon('fas', 'edit', class: "calendar_header__buttons__button__icon")
+
+    - if other_path[:delete]
+      =link_to other_path[:delete][:path], method: :delete, data: {confirm: "削除するともとに戻せません。よろしいですか？"}, class: "calendar_header__buttons__button", title: other_path[:delete][:text] do
+        =icon('fas', 'trash', class: "calendar_header__buttons__button__icon")

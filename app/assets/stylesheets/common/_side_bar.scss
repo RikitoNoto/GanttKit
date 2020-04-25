@@ -13,14 +13,7 @@
   &__work
   {
     display: block;
-    margin: 0 auto 20px;
-    padding: 10px 10px 0;
-    height: $sidebar_work_height;
-    width: $sidebar_width - $sidebar_inner_area * 2;
-    background-color: #FFFFFF;
-    box-sizing: border-box;
-    border-left: solid $sidebar_work_border_width $main_color;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
+    @include post_it($height: $sidebar_work_height, $width: ($sidebar_width - $sidebar_inner_area * 2), $padding_margin: true);
     @include font($size:16px);
     &:hover
     {

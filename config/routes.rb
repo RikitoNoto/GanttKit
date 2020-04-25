@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :tasks, only: [:index]
     end
   end
-  resources :works, only: [:new, :create] do
+  resources :works, only: [:show, :new, :create, :edit, :update, :destroy] do
     resources :tasks, only: [:index, :new, :create]#ここのindexはカレンダーフォームのajax用。通常はユーザとワークにネストされたほうを使用する。
   end
 

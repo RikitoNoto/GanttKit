@@ -1,7 +1,7 @@
 class Work < ApplicationRecord
-    has_many :user_works
+    has_many :user_works, dependent: :destroy
     has_many :users, through: :user_works
-    has_many :tasks
+    has_many :tasks, dependent: :destroy
 
     validates :name, presence: true
     validates :start_date, presence: true

@@ -73,6 +73,18 @@
             display: inline-block;
             width: $form_label_width;
             text-align: right;
+            &--post_it
+            {
+                width: auto;
+                &__icon
+                {
+                    color: gray;
+                    &--trash
+                    {
+                        color: deeppink;
+                    }
+                }
+            }
         }
 
         &__input
@@ -103,6 +115,20 @@
             {
                 width: 80px;
             }
+            &--checkbox
+            {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+
+        &--post_it
+        {
+            margin: 40px auto;
+            @include post_it($height: 50px);
         }
     }
 

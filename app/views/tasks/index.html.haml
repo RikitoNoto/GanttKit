@@ -2,5 +2,5 @@
 .main
     =render partial: "common/side_bar"
     .schedule_area
-        =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", button_title: "Add Task"}
+        =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", button_title: "Add Task", other_path: {edit: {path: edit_work_path(@work), text: "Edit this work"}, delete: {path: work_path(@work), text: "Delete Work"}}}
         =render partial: "calendar/calendar", locals: {projects: @tasks, user: @user}
