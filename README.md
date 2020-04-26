@@ -1,25 +1,57 @@
-# README
+# GanttKit
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
 
-Things you may want to cover:
+　GanttKitはスケジュール管理が苦手な人のために作成されたアプリケーションです。
+スケジュールの作成には詳細な入力が必要で、根拠のないスケジューリングが原因の不毛なリスケジュールの発生を未然に防ぎます。
+　また、手軽に詳細なスケジュールの作成ができるため、今まで時間のかかっていたスケジューリングの時間をあなたの趣味の時間に変えることができます。
+***
+## アクセス
 
-* Ruby version
+[GanttKitのご使用はこちら](https://ganttkit.herokuapp.com/)
 
-* System dependencies
+***
 
-* Configuration
+## 制作背景
 
-* Database creation
+　予定を立てることが苦手な私の様な人のためにこのアプリケーションは開発されました。
+スケジュールが立てられない人には以下の3つの原因があると考えそれらを克服するために開発を行っています。
 
-* Database initialization
+- 1つのタスクにかかる時間が把握できない。
+- 全体だけを見て大雑把な予定を建ててしまう。
+- リスケジュールが面倒
 
-* How to run the test suite
+上記の3点を以下の機能で克服をします。
 
-* Services (job queues, cache servers, search engines, etc.)
+- 1つのタスクにかかる時間が把握できない。
+  - 機械学習(回帰分析)を使用し、今までの統計から時間の自動推測を行う。
+- 全体だけを見て大雑把な予定を建ててしまう。
+  - RDBを使用し、タスクを3段階で詳細にスケジューリングすることで、曖昧なスケジューリングを防ぐ
+- リスケジュールが面倒
+  - 単純なリスケジュールであれば、自動で行う。
 
-* Deployment instructions
+***
 
-* ...
-https://www.lucidchart.com/documents/edit/d75268f5-58f7-4575-a0f4-05fcf3f12ae6/0_0?beaconFlowId=7A1529A81DFB06B6#?folder_id=home&browser=icon
+## 実際の動作
+
+***
+
+### 工夫したポイント
+
+***
+
+## DB設計詳細
+- [ER図](https://www.lucidchart.com/documents/edit/d75268f5-58f7-4575-a0f4-05fcf3f12ae6/0_0?beaconFlowId=7A1529A81DFB06B6#?folder_id=home&browser=icon)
+
+▼README項目一覧
+　(マストで書いてほしいことは★つけてます！)
+★アプリ名
+★概要(このアプリでできることを書いて下さい)
+★本番環境(デプロイ先　テストアカウント＆ID)
+★制作背景(意図)
+★DEMO(gifで動画や写真を貼って、ビューのイメージを掴んでもらいます)
+・工夫したポイント
+・使用技術(開発環境)
+・課題や今後実装したい機能
+★DB設計 
+
