@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resources :tasks, only: [:show]
   end
   resources :works, only: [:show, :new, :create, :edit, :update, :destroy] do
-    resources :tasks, only: [:index, :new, :create, :edit, :update]#ここのindexはカレンダーフォームのajax用。通常はユーザとワークにネストされたほうを使用する。
+    resources :tasks, only: [:index, :new, :create, :edit, :update] do#ここのindexはカレンダーフォームのajax用。通常はユーザとワークにネストされたほうを使用する。
+      #task#showからplanとprogressを作成する用
+      resources :plans, only: [:new]
+      resources :progresses, only: [:new]
+    end
   end
 
   resources :tasks, only: [ :destroy]

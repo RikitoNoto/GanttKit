@@ -7,6 +7,7 @@ module Calendar
     end
 
     def start_time
+        return nil unless start_date
         date = start_date
         return Time.new(date.year, date.month, date.day, super.hour, super.min, super.sec)
     end

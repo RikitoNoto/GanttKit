@@ -1,22 +1,34 @@
 .calendar_header
   %p.calendar_header__title #{title}
   .calendar_header__buttons
-    - if add_button_title#追加ボタンのタイトルを受け取っていたら実装(work#indexとtask#indexのみ表示する)
-      =link_to current_new_path, method: :get, class: "calendar_header__buttons__button", title: add_button_title do
-        -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new
-        =icon('fas', 'plus-circle', class: "calendar_header__buttons__button__icon")
-
     -# 以下選択url。部分テンプレート呼び出しでハッシュを入れることでよびだし。
-    -# other_path[アクション名][url]のような形で受け取るので呼び出したくないときは部分テンプレートで空のハッシュを入れないようにする。
-    -# 構文は other_path: {アクション名: {url: URL, text: ホバーしたときに表示する文字}}
-    - if other_path[:show]
-      =link_to other_path[:show][:path], method: :get, class: "calendar_header__buttons__button", title: other_path[:show][:text] do
+    -# paths[アクション名][url]のような形で受け取るので呼び出したくないときは部分テンプレートで空のハッシュを入れないようにする。
+    -# 構文は paths: {アクション名: {url: URL, text: ホバーしたときに表示する文字}}
+    
+    - if paths[:up]
+      =link_to paths[:up][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:up][:text] do
+        =icon('fas', 'arrow-circle-left', class: "calendar_header__buttons__button__icon")
+
+    - if paths[:new]
+      =link_to paths[:new][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:new][:text] do
+        =icon('fas', 'plus-circle', class: "calendar_header__buttons__button__icon")
+        
+    - if paths[:plan]
+      =link_to paths[:plan][:new][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:plan][:new][:text] do
+        =icon('fas', 'calendar-plus', class: "calendar_header__buttons__button__icon")
+
+    - if paths[:progress]
+      =link_to paths[:progress][:new][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:progress][:new][:text] do
+        =icon('fas', 'calendar-check', class: "calendar_header__buttons__button__icon")
+
+    - if paths[:show]
+      =link_to paths[:show][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:show][:text] do
         =icon('fas', 'book', class: "calendar_header__buttons__button__icon")
 
-    - if other_path[:edit]
-      =link_to other_path[:edit][:path], method: :get, class: "calendar_header__buttons__button", title: other_path[:edit][:text] do
+    - if paths[:edit]
+      =link_to paths[:edit][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:edit][:text] do
         =icon('fas', 'edit', class: "calendar_header__buttons__button__icon")
 
-    - if other_path[:delete]
-      =link_to other_path[:delete][:path], method: :delete, data: {confirm: "削除するともとに戻せません。よろしいですか？"}, class: "calendar_header__buttons__button", title: other_path[:delete][:text] do
+    - if paths[:delete]
+      =link_to paths[:delete][:path], method: :delete, data: {confirm: "削除するともとに戻せません。よろしいですか？"}, class: "calendar_header__buttons__button", title: paths[:delete][:text] do
         =icon('fas', 'trash', class: "calendar_header__buttons__button__icon")

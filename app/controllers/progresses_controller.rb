@@ -4,6 +4,7 @@ class ProgressesController < ApplicationController
     def new
         @work = current_user.works.first unless @work#workの中身がnilなら適当なworkを入れる(selectorに値を入れるため)
         @progress = Progress.new
+        @progress.task_id = params[:task_id] if params[:task_id]
     end
 
     def create

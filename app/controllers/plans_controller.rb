@@ -4,6 +4,7 @@ class PlansController < ApplicationController
     def new
         @work = current_user.works.first unless @work#workの中身がnilなら適当なworkを入れる(selectorに値を入れるため)
         @plan = Plan.new
+        @plan.task_id = params[:task_id] if params[:task_id]
     end
 
     def create
