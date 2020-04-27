@@ -10,7 +10,9 @@
         = f.label :password, class: "form__field__label"
         = f.password_field :password, class: "form__field__input", autocomplete: "current-password"
       = f.submit "Log in", class: "form__submit"
-
+    %p.form__other_link
+      アカウントをお持ちでない方は
+      = link_to "こちら", new_user_registration_path, class: "form__other_link--link"
 
   %small.form_image__copyright
     =link_to "https://pixabay.com/ja/users/Pexels-2286921/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1867752", class: "image_copyright" do

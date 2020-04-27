@@ -151,4 +151,15 @@
             border-bottom: none;
         }
     }
+
+    &__other_link
+    {
+        margin-top: 10px;
+        text-align: center;
+        &--link
+        {
+            font-weight: bold;
+            @include link_color($color: black);
+        }
+    }
 }
