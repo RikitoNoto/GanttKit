@@ -27,8 +27,23 @@ class Task < ApplicationRecord
     total_time = progresses_total_time ? progresses_total_time : plans_total_time#進捗の時間が0ならplanの時間を返す
     status = {plan: {total_time: plans_total_time, status: get_status(date, user, Plan)},
     progress: {total_time: progresses_total_time, status: get_status(date, user, Progress)}}#planとprogressのstatusを作成
-    status[:status] = status[:progress][:status] ? status[:progress][:status] : status[:plan][:status]
+    status[:status] = status[:progress][:status] ? status[:progress][:status] : status[:plan][:status]#data-statusにプログレスがあればプログレス、なければplanのステータスをいれる。
+    status[:parent] = {status: get_self_status(date)}
     return {total_time: total_time, status: status}
+  end
+  
+  #このtask自身のステータスを返す。
+  #startとendの日付で判断
+  def get_self_status(date)
+    if date == self.start_date && date == self.end_date
+      return "start-end"
+    elsif date == self.start_date
+      return "start"
+    elsif date == self.end_date
+      return "end"
+    elsif date > self.start_date && date < self.end_date
+      return "middle"
+    end
   end
 
   private

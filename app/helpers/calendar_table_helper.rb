@@ -60,19 +60,7 @@ module CalendarTableHelper
         return nil
     end
 
-    
-    def create_days_row_with_project(project, user, y)
-        #内部的にカレンダーの日付繰り返しを行う。(プロジェクトの行も日付分列があるため)
-        #このメソッドはブロック変数でx座標を返してくれる
-        create_days_row do |current_day, x|
-            detail_of_day = project.detail_of_date(current_day, user)#{total_time: 合計時間, status: {ステータス}}
-            #taskとworkのインスタンスメソッド
-            #その日のユーザーの詳細を返す。
 
-            point = [x, y]#座標の定義
-            yield(detail_of_day[:total_time], point, detail_of_day[:status])
-        end
-    end
     # 〇total_time
     # その日の出力される合計時間
     # progressが優先で表示される
@@ -92,7 +80,71 @@ module CalendarTableHelper
     # end: right-top-bottom
     # middle: top-bottom
     # start-end: all
+
+    def create_days_row_with_project(project, user, y)
+        #内部的にカレンダーの日付繰り返しを行う。(プロジェクトの行も日付分列があるため)
+        #このメソッドはブロック変数でx座標を返してくれる
+        create_days_row do |current_day, x|
+            detail_of_day = project.detail_of_date(current_day, user)#{total_time: 合計時間, status: {ステータス}}
+            #taskとworkのインスタンスメソッド
+            #その日のユーザーの詳細を返す。
+            point = [x, y]#座標の定義
+            yield(detail_of_day[:total_time], point, detail_of_day[:status])
+        end
+    end
+
+    def create_days_row_with_plans_progresses(details, y)
+        create_days_row do |current_day, x|
+            detail_of_day = detail_plans_progresses(details, current_day)#{total_time: 合計時間, status: {ステータス}}
+            detail_of_day[details.model_name.to_s.downcase.to_sym] = {status: detail_of_day[:status]} if detail_of_day[:status]
+            #その日のユーザーの詳細を返す。
+            point = [x, y]#座標の定義
+            yield(detail_of_day[:total_time], point, detail_of_day)
+        end
+    end
+        
     private
+
+    def detail_plans_progresses(details, date)
+        details_total_time = details_date_total_time(details, date)
+        if details_total_time
+            #現在の日付にデータがあった場合に通る
+            #ステータスの設定
+            status = details_status(details, date)
+        end
+        return {total_time: details_total_time, status: status, parent: {status: @task.get_self_status(date)}}
+        #親のtaskのインスタンスメソッドから親のステータスを取得。開始ー終了期間の背景色を変えるため
+        #受け取るtaskインスタンス変数から取得。(progresses.take.taskとかだとprogressesの中身がない場合に動作しないので)
+        #TODO: 他の場所で流用するならdetails.takeを一意性のあるやり方に変更必要
+    end
+
+    def details_status(details, date)
+        yesterday_time = details_date_total_time(details, date - 1.days)#昨日にデータはあるかどうか確認
+        tommorrow_time = details_date_total_time(details, date + 1.days)#明日にデータはあるかどうか確認
+        if yesterday_time && tommorrow_time
+            return "middle"
+        elsif yesterday_time
+            return "end"
+        elsif tommorrow_time
+            return "start"
+        else
+            return "start-end"
+        end
+    end
+
+    def details_date_total_time(details, date, when_zero: nil)#受け取った日付の合計時間をdetailsから算出
+        total_time = 0
+        details.each do |detail|#ここで回すのはplanかprogressのassosiation
+            if detail.include_date?(date)#ここで現在の日付にdetailクラスがあるかを確認
+                total_time += detail.time
+            end
+        end
+        if total_time == 0#0ならwhen_zeroの値を返す。
+            return when_zero
+        end
+
+        return total_time#0以外なら合計値を返す。
+    end
 
 #=================================================================
 

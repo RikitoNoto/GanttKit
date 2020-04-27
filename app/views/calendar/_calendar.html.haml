@@ -1,13 +1,25 @@
 .calendar
     %table.projects_table
-        %tr.projects_table__title
-            %th.projects_table__name.table_center
-                = "#{projects.model_name.to_s}"
-        -projects.each do |project|
-            %tr
-                %th.table_center.project__title
-                    =link_to project.name, project.calendar_title_link(user: user)
-                    -#  .graph{style: "width: #{100*project.completeness}%;"}
+
+        - if task_show_name
+            %tr.projects_table__title
+                %th.projects_table__name.table_center
+                    = task_show_name
+                %tr
+                    %th.table_center.project__title
+                        Plan
+                %tr
+                    %th.table_center.project__title
+                        Progress
+        - else
+            %tr.projects_table__title
+                %th.projects_table__name.table_center
+                    = "#{projects.model_name.to_s}"
+            -projects.each do |project|
+                %tr
+                    %th.table_center.project__title
+                        =link_to project.name, project.calendar_title_link(user: user)
+                        -#  .graph{style: "width: #{100*project.completeness}%;"}
     .scroll
         %table.dates
             %tr
@@ -20,6 +32,13 @@
                     %th.table_center.dates__day #{current_day.day}
             - create_project_days_row(projects) do |project, y|
                 %tr
-                    - create_days_row_with_project(project, user, y) do |total_time, point, status|#右から合計時間、座標、ステータス
-
-                        %th{class: "table_center dates__day calendar__days_cell", data: status} #{total_time&.to_i}
+                    - if task_show_name
+                        -# task#showだと多重配列で受け取るのでメソッドを分岐している
+                        -# projectにはplansかprogressesが入っている。（アソシエーション）
+                        - create_days_row_with_plans_progresses(project, y) do |total_time, point, status|#右から合計時間、座標、ステータス
+                            %th{class: "table_center dates__day calendar__days_cell", data: status} #{total_time&.to_i}
+                    - else
+                        -# work#indexとtask#indexはこっち
+                        -# projectにはworkかtaskのインスタンスが入っている。
+                        - create_days_row_with_project(project, user, y) do |total_time, point, status|#右から合計時間、座標、ステータス
+                            %th{class: "table_center dates__day calendar__days_cell", data: status} #{total_time&.to_i}

@@ -1,9 +1,10 @@
 .calendar_header
   %p.calendar_header__title #{title}
   .calendar_header__buttons
-    =link_to current_new_path, method: :get, class: "calendar_header__buttons__button", title: button_title do
-      -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new
-      =icon('fas', 'plus-circle', class: "calendar_header__buttons__button__icon")
+    - if add_button_title#追加ボタンのタイトルを受け取っていたら実装(work#indexとtask#indexのみ表示する)
+      =link_to current_new_path, method: :get, class: "calendar_header__buttons__button", title: add_button_title do
+        -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new
+        =icon('fas', 'plus-circle', class: "calendar_header__buttons__button__icon")
 
     -# 以下選択url。部分テンプレート呼び出しでハッシュを入れることでよびだし。
     -# other_path[アクション名][url]のような形で受け取るので呼び出したくないときは部分テンプレートで空のハッシュを入れないようにする。
