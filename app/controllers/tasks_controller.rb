@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
-    before_action :set_calendar_edge_days, only: [:index]
-    before_action :set_user, only: [:index]
-    before_action :set_work, only: [:index, :new, :create]
+    before_action :set_calendar_edge_days, only: [:index, :show]
+    before_action :set_user, only: [:index, :show]
+    before_action :set_work, only: [:index, :new, :create, :edit, :update]
+    before_action :set_task, only: [:show, :edit, :update, :destroy]
+    before_action :set_data_list_for_task_form, only: [:new, :edit]
 
     def index
         respond_to do |format|
@@ -14,9 +16,13 @@ class TasksController < ApplicationController
         end
     end
 
+    def show
+        @work = @task.work
+        @resources = [@task.plans, @task.progresses]
+    end
+
     def new
         @task = @work.tasks.build
-        @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
     end
 
     def create
@@ -30,7 +36,36 @@ class TasksController < ApplicationController
         end
     end
 
+    def edit
+    end
+
+    def update
+        if @task.update(task_params)
+            redirect_to user_task_path(current_user, @task)
+        else
+            render :edit
+        end
+    end
+
+    def destroy
+        @work = @task.work
+        if @task.destroy
+            redirect_to work_tasks_path(@work)
+        else
+            redirect_to user_task_path(current_user, @task)
+            #TODO: エラー起きた時のメッセージ
+        end
+    end
+
     private
+
+    def set_task
+        @task = Task.find(params[:id])
+    end
+
+    def set_data_list_for_task_form
+        @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
+    end
 
     def task_params
         params.require(:task).permit(:name, :quantity, :unit, :time, :start_date, :start_time, :end_date, :end_time)

@@ -37,9 +37,11 @@ $day_width: 25px;
 $table_row_height: 30px;
 $light_border: 1px solid #AAAAAA;
 $dark_border: 2px solid #555555;
+$task_border: 1px solid #888888;
 $calendar_cell_background_color: #C5D4E1;
 $calendar_cell_background_color--plan: #F9F0CE;
 $calendar_cell_background_color--progress: #A6EAA6;
+
 
 // =======form=========
 $form_label_width: 150px;
@@ -87,8 +89,41 @@ $form_label_width: 150px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
 }
 
+@mixin base_cells_border()
+{
+  //ベースとなるセルの範囲
+  //現状はボーダーはそのまま、背景白にしているためほぼコメントアウト
+  &[data-parent-status]
+  {
+    //border: none;
+    //border-top: $task_border;
+    //border-bottom: $task_border;
+    background-color: white;
+  }
+  /*
+  &[data-parent-status='middle']
+  {
+    //middleの時の設定をここに入れる
+  }
+  &[data-parent-status='start']
+  {
+    border-left: $task_border;
+  }
+  &[data-parent-status='end']
+  {
+    border-right: $task_border;
+  }
+  &[data-parent-status='start-end']
+  {
+    border-right: $task_border;
+    border-left: $task_border;
+  }
+  */
+}
+
 @mixin cells_border()
 {
+  @include base_cells_border();
   &[data-status]
   {
     border: none;

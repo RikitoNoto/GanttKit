@@ -56,6 +56,7 @@
     z-index: 0;
     &__days_cell
     {
+        background-color: #E9E9E9;
         box-sizing: border-box;
         @include cells_border();
     }

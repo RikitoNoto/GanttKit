@@ -2,4 +2,4 @@
 .main
     = render partial: "common/side_bar"
     .form.form--add_form
-        = render partial: "tasks/task_form", locals: {use: "Create", url: work_tasks_path(@work)}
+        = render partial: "tasks/task_form", locals: {use: "Update", url: work_task_path(@work, @task)}

@@ -40,7 +40,7 @@ class Work < ApplicationRecord
     def detail_of_date(date, user)
         tasks = self.get_the_days_task(date, user)
         total_time = nil#workIndexの場合は合計時間は空欄とする。
-        status = {status: get_status(tasks), tasks: {status: get_status(tasks)}}
+        status = {status: get_status(tasks), tasks: {status: get_status(tasks)}, parent: {status: get_self_status(date)}}
         return {total_time: total_time, status: status}
     end
 
@@ -61,5 +61,19 @@ class Work < ApplicationRecord
             status = "start-end"
         end
         return status
+    end
+
+    #このtask自身のステータスを返す。
+    #startとendの日付で判断
+    def get_self_status(date)
+        if date == self.start_date && date == self.end_date
+            return "start-end"
+        elsif date == self.start_date
+            return "start"
+        elsif date == self.end_date
+            return "end"
+        elsif date > self.start_date && date < self.end_date
+            return "middle"
+        end
     end
 end
