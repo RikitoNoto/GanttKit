@@ -1,4 +1,6 @@
 class Work < ApplicationRecord
+    include GetterStartEndTime
+    
     has_many :user_works, dependent: :destroy
     has_many :users, through: :user_works
     has_many :tasks, dependent: :destroy

@@ -1,15 +1,18 @@
 class Task < ApplicationRecord
+  include GetterStartEndTime
+
   has_many :user_tasks, dependent: :destroy
   has_many :users, through: :user_tasks
   has_many :plans, dependent: :destroy
   has_many :progresses, dependent: :destroy
   belongs_to :work
+  alias :parent :work
 
   validates :name, presence: true
-  validates :start_date, presence: true
-  validates :start_time, presence: true
-  validates :end_date, presence: true
-  validates :end_time, presence: true
+  validates :start_date, presence: true, within_start_time: true
+  validates :start_time, presence: true, within_start_time: true
+  validates :end_date, presence: true, within_end_time: true
+  validates :end_time, presence: true, within_end_time: true
   validates :quantity, presence: true
 
   def calendar_title_link(user: nil)
