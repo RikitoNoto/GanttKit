@@ -20,16 +20,16 @@
                     %th.table_center.project__title
                         =link_to project.name, project.calendar_title_link(user: user)
                         -#  .graph{style: "width: #{100*project.completeness}%;"}
-    .scroll
+    .scroll#scroll_area_for_js
         %table.dates
             %tr
                 =create_months_row() do |colspan_size, month|
                     -# 月を表示する行
                     %th.table_center.dates__month{colspan: colspan_size, style: "width: #{colspan_size*25}px"} #{month}
             %tr.dates__title
-                - create_days_row do |current_day| #日付を受け取っている
+                - create_days_row do |current_day, i| #日付を受け取っている
                     -# 日を表示する行
-                    %th.table_center.dates__day #{current_day.day}
+                    %th.table_center.dates__day{id: (("today_for_js" if current_day == Date.today) or ("first_date_for_js" if i == 1))} #{current_day.day}
             - create_project_days_row(projects) do |project, y|
                 %tr
                     - if task_show_name
