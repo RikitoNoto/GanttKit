@@ -96,6 +96,12 @@
 {
     position: relative;
     width: $project_name_width;
+    max-width: $project_name_width;
+    height: $table_row_height;
+    max-width: $table_row_height;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .progress_bar
