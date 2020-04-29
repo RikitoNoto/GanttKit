@@ -13,7 +13,8 @@ class Task < ApplicationRecord
   validates :start_time, presence: true, within_start_time: true
   validates :end_date, presence: true, within_end_time: true
   validates :end_time, presence: true, within_end_time: true
-  validates :quantity, presence: true
+  validates :quantity, presence: true, numericality: { greater_than: 0}
+  validates :time, presence: true, numericality: { greater_than: 0}
 
   def calendar_title_link(user: nil)
       return "/users/#{user.id}/tasks/#{self.id}"#タスクの詳細に飛ぶ

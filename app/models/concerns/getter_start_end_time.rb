@@ -11,9 +11,16 @@ module GetterStartEndTime
   end
 
   def start_time=(time)
-    super(time) unless start_date
-    date = start_date
-    super(Time.new(date.year, date.month, date.day, time.hour, time.min, time.sec))
+    if time#timeがnilでなければ
+      if start_date#start_dateがあればそれも含めて作成
+        date = start_date
+        super(Time.new(date.year, date.month, date.day, time.hour, time.min, time.sec))
+      else#start_dateがなければtimeだけ(2000/1/1)で作成
+        super(time)
+      end
+    else#timeがnilだったらnil代入
+      super(nil)
+    end
   end
 
   def start_time
@@ -31,9 +38,16 @@ module GetterStartEndTime
   end
 
   def end_time=(time)
-    super(time) unless end_date
-    date = end_date
-    super(Time.new(date.year, date.month, date.day, time.hour, time.min, time.sec))
+    if time#timeがnilでなければ
+      if end_date#end_dateがあればそれも含めて作成
+        date = end_date
+        super(Time.new(date.year, date.month, date.day, time.hour, time.min, time.sec))
+      else#end_dateがなければtimeだけ(2000/1/1)で作成
+        super(time)
+      end
+    else#timeがnilだったらnil代入
+      super(nil)
+    end
   end
 
   def end_time

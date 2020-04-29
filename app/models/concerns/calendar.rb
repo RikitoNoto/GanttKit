@@ -33,14 +33,8 @@ module Calendar
     end
 
     def end_time
-        return nil unless start_date
-        return nil unless time
-        date = start_date
-        overflow_day = (time/24).to_i
-        hour = (time%24).to_i
-        min = ((time - time.to_i)/60).to_i
-        sec = ((time - time.to_i)/60/60).to_i
-        return Time.new(date.year, date.month, date.day + overflow_day, start_time.hour + hour, start_time.min + min, start_time.sec + sec)
+        return nil unless start_date and time and start_time
+        return start_time + time.hours
     end
 
     def include_date?(date)#開始日時と終了日時から受け取った日付が範囲内かをチェックする。
