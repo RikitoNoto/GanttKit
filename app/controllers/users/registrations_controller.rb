@@ -12,12 +12,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |user|
-      user_option = user.build_user_option
-      user_option.start = Time.at(9*60*60 - 9*60*60)#開始時間を9時に設定。9*60*60を引いているのはタイムゾーンのオフセットを打ち消すため
-      user_option.end = Time.at(18*60*60 - 9*60*60)#終了時間を18時に設定
-      user_option.save
-      user_option.holidays.create(day: 0)
-      user_option.holidays.create(day: 6)
+      if user.persisted?
+        user_option = user.build_user_option
+        user_option.start = Time.at(9*60*60 - 9*60*60)#開始時間を9時に設定。9*60*60を引いているのはタイムゾーンのオフセットを打ち消すため
+        user_option.end = Time.at(18*60*60 - 9*60*60)#終了時間を18時に設定
+        user_option.save
+        user_option.holidays.create(day: 0)
+        user_option.holidays.create(day: 6)
+      end
     end
   end
 

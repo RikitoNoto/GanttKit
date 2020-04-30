@@ -9,3 +9,8 @@
   -#       %li= message
   %p.form__error_message
     =resource.errors.full_messages.first
+%p.form__error_message
+  = flash[:alert]
+
+%p.form__error_message
+  = flash[:notice]

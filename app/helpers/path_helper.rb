@@ -10,7 +10,11 @@ module PathHelper
     # end#prefexpathの第二オペランドにハッシュを入れるとparamsとして渡せるみたいなので現状使用しない
 
     def current_new_path(user: "ignore")#現在の位置から新規作成のパスを作成する。
-        url = "#{request.path_info}/new"#users/1/works/ならusers/1/works/new
+        if request.path_info == "/"
+            url = "/works/new"#ルートパスならwork#newに行くように
+        else
+            url = "#{request.path_info}/new"#users/1/works/ならusers/1/works/new
+        end
         case user
         when "ignore"#userをurlに含めないなら(デフォルト)
             return url.sub(/\/users\/\d+/, "")

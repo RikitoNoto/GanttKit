@@ -1,6 +1,7 @@
 .form.form--add_form#calendar_form_for_js
     %p.form__title
         Add #{resource.model_name.to_s} Form
+    = render "common/error_messages", resource: resource
     = form_with model: resource, local: true do |f|
         .form__field
             -# planとprogressはworkとのアソシエーションがないのでサーバー側では使用しない
