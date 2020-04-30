@@ -77,3 +77,4 @@ gem "haml-rails"
 gem 'font-awesome-sass', '~> 5.12.0'
 gem "jquery-rails"
 gem 'draper'
+gem 'rails-i18n'

@@ -11,7 +11,7 @@ module GetterStartEndTime
   end
 
   def start_time=(time)
-    if time#timeがnilでなければ
+    if time.to_time#timeがnilでなければ
       if start_date#start_dateがあればそれも含めて作成
         time = Time.parse(time.to_s)#文字列変換→perseでTime型のクラスに変換
         super(Time.new(start_date.year, start_date.month, start_date.day, time.hour, time.min, time.sec))
@@ -38,7 +38,7 @@ module GetterStartEndTime
   end
 
   def end_time=(time)
-    if time#timeがnilでなければ
+    if time.to_time#timeがnilでなければ
       if end_date#end_dateがあればそれも含めて作成
         time = Time.parse(time.to_s)#文字列変換→perseでTime型のクラスに変換
         super(Time.new(end_date.year, end_date.month, end_date.day, time.hour, time.min, time.sec))
