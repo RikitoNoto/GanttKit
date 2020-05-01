@@ -85,6 +85,11 @@
                     }
                 }
             }
+            &__parent_date
+            {
+                @include font($color: gray, $size: 10px);
+                white-space: nowrap;
+            }
         }
 
         &__input

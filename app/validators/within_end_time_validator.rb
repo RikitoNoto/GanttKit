@@ -3,7 +3,7 @@ class WithinEndTimeValidator < ActiveModel::EachValidator
         parent = record.parent
         return unless value and parent
         unless parent.send(attribute) >= value
-            record.errors.add(attribute, (options[:message] || "must be within parent's"))
+            record.errors.add(attribute, (options[:message] || I18n.t('errors.messages.more_parent', parent: I18n.t("activerecord.models.#{parent.model_name.to_s.downcase}"))))
         end
     end
 end

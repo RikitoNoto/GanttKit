@@ -12,7 +12,7 @@ class Task < ApplicationRecord
   validates :start_date, presence: true, within_start_time: true
   validates :start_time, presence: true, within_start_time: true
   validates :end_date, presence: true, within_end_time: true
-  validates :end_time, presence: true, within_end_time: true
+  validates :end_time, presence: true, within_end_time: true, end_after_start: true
   validates :quantity, presence: true, numericality: { greater_than: 0}
   validates :time, presence: true, numericality: { greater_than: 0}
 

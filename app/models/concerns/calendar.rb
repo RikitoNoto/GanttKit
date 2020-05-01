@@ -5,8 +5,8 @@ module Calendar
         belongs_to :task
         alias :parent :task
     
-        validates :quantity, presence: true
-        validates :time, presence: true
+        validates :quantity, presence: true, numericality: { greater_than: 0}
+        validates :time, presence: true, numericality: { greater_than: 0}
         validates :start_date, presence: true, within_start_time: true
         validates :start_time, presence: true, within_start_time: true
         validates :end_date, presence: true, within_end_time: true

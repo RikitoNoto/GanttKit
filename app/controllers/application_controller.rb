@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
     def set_work#ヘッダーでworkparamsがあったりなかったりするのでエラーが起きないように分岐を作っている。
         if params[:work_id]
-            @work = Work.find(params[:work_id])
+            @work = Work.find(params[:work_id]).decorate
         else
             @work = nil#ここではnilだがtask#indexでユーザーの最初のワークを入れる
         end
