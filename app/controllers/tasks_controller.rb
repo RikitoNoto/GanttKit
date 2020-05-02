@@ -27,7 +27,7 @@ class TasksController < ApplicationController
 
     def create
         @task = Task.new(task_params.merge(work_id: params[:work_id]))
-        if @task.save
+        if @task.valid? && @task.set_name(task_name_params[:name]) and @task.save#まずは@taskの確認。OKならnameをsave。その後taskの保存
             @task.users << current_user
             redirect_to user_work_tasks_path(current_user, @work)
         else
@@ -40,7 +40,8 @@ class TasksController < ApplicationController
     end
 
     def update
-        if @task.update(task_params)
+        if @task.update_no_save(task_params) && @task.set_name(task_name_params)
+            @task.save
             redirect_to user_task_path(current_user, @task)
         else
             render :edit
@@ -68,6 +69,10 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:name, :quantity, :unit, :time, :start_date, :start_time, :end_date, :end_time)
+        params.require(:task).permit(:quantity, :unit, :time, :start_date, :start_time, :end_date, :end_time)
+    end
+
+    def task_name_params
+        params.require(:task).permit(:name)
     end
 end

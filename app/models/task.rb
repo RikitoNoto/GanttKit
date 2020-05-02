@@ -6,15 +6,26 @@ class Task < ApplicationRecord
   has_many :plans, dependent: :destroy
   has_many :progresses, dependent: :destroy
   belongs_to :work
+  belongs_to :task_name, optional: true
   alias :parent :work
 
-  validates :name, presence: true
   validates :start_date, presence: true, within_start_time: true
   validates :start_time, presence: true, within_start_time: true
   validates :end_date, presence: true, within_end_time: true
   validates :end_time, presence: true, within_end_time: true, end_after_start: true
   validates :quantity, presence: true, numericality: { greater_than: 0}
   validates :time, presence: true, numericality: { greater_than: 0}
+
+  def name
+    return nil unless self.task_name
+    self.task_name.name
+  end
+
+
+  def set_name(task_name)
+    self.task_name_id = TaskName.get_id(task_name)
+    return self.name
+  end
 
   def calendar_title_link(user: nil)
       return "/users/#{user.id}/tasks/#{self.id}"#タスクの詳細に飛ぶ

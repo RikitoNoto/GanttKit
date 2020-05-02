@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_015756) do
+ActiveRecord::Schema.define(version: 2020_05_02_041233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,8 +49,22 @@ ActiveRecord::Schema.define(version: 2020_04_20_015756) do
     t.index ["user_id"], name: "index_progresses_on_user_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "task_names", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "task_params", force: :cascade do |t|
+    t.integer "order", null: false
+    t.float "param", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "task_name_id", null: false
+    t.index ["task_name_id"], name: "index_task_params_on_task_name_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
     t.float "quantity", null: false
     t.string "unit"
     t.float "time"
@@ -61,6 +75,8 @@ ActiveRecord::Schema.define(version: 2020_04_20_015756) do
     t.bigint "work_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "task_name_id", null: false
+    t.index ["task_name_id"], name: "index_tasks_on_task_name_id"
     t.index ["work_id"], name: "index_tasks_on_work_id"
   end
 
@@ -119,6 +135,8 @@ ActiveRecord::Schema.define(version: 2020_04_20_015756) do
   add_foreign_key "plans", "users"
   add_foreign_key "progresses", "tasks"
   add_foreign_key "progresses", "users"
+  add_foreign_key "task_params", "task_names"
+  add_foreign_key "tasks", "task_names"
   add_foreign_key "tasks", "works"
   add_foreign_key "user_options", "users"
   add_foreign_key "user_tasks", "tasks"

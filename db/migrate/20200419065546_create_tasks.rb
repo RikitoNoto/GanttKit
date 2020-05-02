@@ -1,7 +1,6 @@
 class CreateTasks < ActiveRecord::Migration[5.2]
   def change
     create_table :tasks do |t|
-      t.string :name, null: false
       t.float :quantity, null: false
       t.string :unit
       t.float :time
