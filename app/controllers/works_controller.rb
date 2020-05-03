@@ -4,7 +4,21 @@ class WorksController < ApplicationController
     before_action :set_work, only: [:show, :edit, :update, :destroy]
 
     def index
-        @works = @user.works.includes(:tasks).where(display: true).order(created_at: :asc)
+        respond_to do |format|
+            format.html do
+                @works = @user.works.includes(:tasks).where(display: true).order(created_at: :asc)
+            end
+
+            format.js do
+                if(params[:display])
+                    @works = @user.works.includes(:tasks).order(created_at: :asc)
+                    @eye = "open"
+                else
+                    @works = @user.works.includes(:tasks).where(display: true).order(created_at: :asc)
+                    @eye = nil
+                end
+            end
+        end
     end
 
     def show

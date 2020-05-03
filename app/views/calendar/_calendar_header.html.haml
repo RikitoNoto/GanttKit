@@ -10,11 +10,11 @@
         =icon('fas', 'arrow-circle-left', class: "calendar_header__buttons__button__icon")
 
     - if paths[:eye_open]
-      =link_to paths[:eye_open][:path], method: :put, class: "calendar_header__buttons__button", remote: true, title: paths[:eye_open][:text] do
+      =link_to paths[:eye_open][:path], method: paths[:eye_open][:method], class: "calendar_header__buttons__button", remote: true, title: paths[:eye_open][:text] do
         =icon('fas', 'eye', class: "calendar_header__buttons__button__icon")
 
     - if paths[:eye_close]
-      =link_to paths[:eye_close][:path], method: :put, class: "calendar_header__buttons__button", remote: true, title: paths[:eye_close][:text] do
+      =link_to paths[:eye_close][:path], method: paths[:eye_close][:method], class: "calendar_header__buttons__button", remote: true, title: paths[:eye_close][:text] do
         =icon('fas', 'eye-slash', class: "calendar_header__buttons__button__icon")
 
     - if paths[:new]
