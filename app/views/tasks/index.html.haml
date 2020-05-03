@@ -2,6 +2,7 @@
 .main
     =render partial: "common/side_bar"
     .schedule_area
-        =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", paths: {up: {path: user_works_path(@user), text: "return Works"}, new: {path: current_new_path, text: "Add Task"}, edit: {path: edit_work_path(@work), text: "Edit this work"}, delete: {path: work_path(@work), text: "Delete this work"}}}
-        -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new
+        %span#calendar_header_for_js
+            -# jsで更新するためにspanでかこっている
+            =render partial: "tasks/task_calendar_header"
         =render partial: "calendar/calendar", locals: {projects: @tasks, user: @user, task_show_name: nil}

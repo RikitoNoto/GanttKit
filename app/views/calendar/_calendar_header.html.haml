@@ -3,11 +3,19 @@
   .calendar_header__buttons
     -# 以下選択url。部分テンプレート呼び出しでハッシュを入れることでよびだし。
     -# paths[アクション名][url]のような形で受け取るので呼び出したくないときは部分テンプレートで空のハッシュを入れないようにする。
-    -# 構文は paths: {アクション名: {url: URL, text: ホバーしたときに表示する文字}}
+    -# 構文は paths: {アクション名: {path: URL, text: ホバーしたときに表示する文字}}
     
     - if paths[:up]
       =link_to paths[:up][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:up][:text] do
         =icon('fas', 'arrow-circle-left', class: "calendar_header__buttons__button__icon")
+
+    - if paths[:eye_open]
+      =link_to paths[:eye_open][:path], method: :put, class: "calendar_header__buttons__button", remote: true, title: paths[:eye_open][:text] do
+        =icon('fas', 'eye', class: "calendar_header__buttons__button__icon")
+
+    - if paths[:eye_close]
+      =link_to paths[:eye_close][:path], method: :put, class: "calendar_header__buttons__button", remote: true, title: paths[:eye_close][:text] do
+        =icon('fas', 'eye-slash', class: "calendar_header__buttons__button__icon")
 
     - if paths[:new]
       =link_to paths[:new][:path], method: :get, class: "calendar_header__buttons__button", title: paths[:new][:text] do

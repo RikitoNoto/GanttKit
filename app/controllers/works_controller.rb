@@ -4,7 +4,7 @@ class WorksController < ApplicationController
     before_action :set_work, only: [:show, :edit, :update, :destroy]
 
     def index
-        @works = @user.works.includes(:tasks).order(created_at: :asc)
+        @works = @user.works.includes(:tasks).where(display: true).order(created_at: :asc)
     end
 
     def show
@@ -28,11 +28,23 @@ class WorksController < ApplicationController
     end
 
     def update
-        if @work.update(work_params)
-            tasks_destroy
-            redirect_to user_work_tasks_path(current_user, @work)
-        else
-            render :edit
+        respond_to do |format|
+            #通常のupdate（edit→submit）時に処理
+            format.html do
+                if @work.update(work_params)
+                    tasks_destroy
+                    redirect_to user_work_tasks_path(current_user, @work)
+                else
+                    render :edit
+                end
+            end
+
+            #task#indexの目ボタン押下時に処理。
+            #work.displayのトグル処理を行う。
+            format.js do
+                @work.update(display: !@work.display)
+                @user = User.find(params[:user_id])
+            end
         end
     end
 
