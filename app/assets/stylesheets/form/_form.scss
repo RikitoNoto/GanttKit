@@ -77,15 +77,23 @@
 
         &__input
         {
+            $height: 40px;
+            $width: 300px;
             box-shadow: 0px 1px rgba(0, 0, 0, 0.5);
             border-radius: 5px;
-            height: 40px;
-            width: 300px;
+            height: $height;
+            width: $width;
             padding: 0 20px;
             font-size: 16px;
 
-            &--name
+            &--description
             {
+                padding-top: 10px;
+                height: $height * 4;
+                min-height: $height * 4;
+                max-height: $height * 4;
+                min-width: $width;
+                max-width: $width;
             }
             &--quantity
             {
@@ -111,6 +119,11 @@
                 align-items: center;
                 cursor: pointer;
             }
+        }
+
+        &--description
+        {
+            height: 200px;
         }
 
         &--post_it

@@ -74,7 +74,7 @@ class WorksController < ApplicationController
     private
 
     def work_params
-        params.require(:work).permit(:name, :start_date, :end_date, :start_time, :end_time)        
+        params.require(:work).permit(:name, :start_date, :end_date, :start_time, :end_time, :description)        
     end
 
     def set_work
