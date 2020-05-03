@@ -2,5 +2,5 @@
 .main
     =render partial: "common/side_bar"
     .schedule_area
-        =render partial: "calendar/calendar_header", locals: {title: "Detail #{@task.name}", paths: {up: {path: user_work_tasks_path(@user, @work), text: "return Tasks"}, plan: {new: {path: new_work_task_plan_path(@work, @task), text: "create plan"}}, progress: {new: {path: new_work_task_progress_path(@work, @task), text: "write progress"}}, edit: {path: edit_work_task_path(@work, @task), text: "Edit this task"}, delete: {path: task_path(@task), text: "Delete this task"}}}
+        =render partial: "calendar/calendar_header", locals: {title: "Detail #{@task.name}", description: @task.description, paths: {up: {path: user_work_tasks_path(@user, @work), text: "return Tasks"}, plan: {new: {path: new_work_task_plan_path(@work, @task), text: "create plan"}}, progress: {new: {path: new_work_task_progress_path(@work, @task), text: "write progress"}}, edit: {path: edit_work_task_path(@work, @task), text: "Edit this task"}, delete: {path: task_path(@task), text: "Delete this task"}}}
         =render partial: "calendar/calendar", locals: {projects: @resources, user: @user, task_show_name: @task.name}

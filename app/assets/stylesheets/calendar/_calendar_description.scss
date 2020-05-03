@@ -1,0 +1,44 @@
+.calendar__description
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    background-color: rgba(200,200,200,0.5);
+    &__text
+    {
+        $padding: 30px;
+        //=========================
+        @include paper($back_color: transparent, $reverse_color: #D3D3D3);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        padding: $padding;
+        height: calc(90% - #{$padding});
+        width: calc(50% - #{$padding});
+        line-height: $padding;
+        background: linear-gradient(#ccc 1px, transparent 1px) white;
+        background-size: auto $padding;
+        white-space: pre;
+    }
+    &__close_button
+    {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        &__icon
+        {
+            color: black;
+            font-size: 30px;
+        }
+    }
+}

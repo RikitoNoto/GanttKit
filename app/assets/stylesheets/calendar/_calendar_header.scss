@@ -21,7 +21,11 @@
       line-height: 100%;
       border-radius: 10px;
       margin-right: 20px;
-      @include iconButton($color: #DDDDDD)
+      @include iconButton($color: #DDDDDD);
+      &--description
+      {
+        display: inline;
+      }
     }
   }
 }

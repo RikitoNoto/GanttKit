@@ -1,7 +1,7 @@
 - if @work.display#workの表示がonになっていれば
-    =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", paths: {up: {path: user_works_path(@user), text: "return Works"}, eye_open: {path: work_path(@work, user_id: @user.id), method: :put, text: "Do Hidden"}, new: {path: current_new_path, text: "Add Task"}, edit: {path: edit_work_path(@work), text: "Edit this work"}, delete: {path: work_path(@work), text: "Delete this work"}}}
+    =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", description: @work.description, paths: {up: {path: user_works_path(@user), text: "return Works"}, eye_open: {path: work_path(@work, user_id: @user.id), method: :put, text: "Do Hidden"}, new: {path: current_new_path, text: "Add Task"}, edit: {path: edit_work_path(@work), text: "Edit this work"}, delete: {path: work_path(@work), text: "Delete this work"}}}
     -# 違いはキーがeye_openかeye_closeだけ
     -# eyepathにuser_idを入れているのはajaxでの更新時にcalendar_headerを丸ごと更新する為
 - else
-    =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", paths: {up: {path: user_works_path(@user), text: "return Works"}, eye_close: {path: work_path(@work, user_id: @user.id), method: :put, text: "Do Display"}, new: {path: current_new_path, text: "Add Task"}, edit: {path: edit_work_path(@work), text: "Edit this work"}, delete: {path: work_path(@work), text: "Delete this work"}}}
+    =render partial: "calendar/calendar_header", locals: {title: "#{@work.name}'s tasks", description: @work.description, paths: {up: {path: user_works_path(@user), text: "return Works"}, eye_close: {path: work_path(@work, user_id: @user.id), method: :put, text: "Do Display"}, new: {path: current_new_path, text: "Add Task"}, edit: {path: edit_work_path(@work), text: "Edit this work"}, delete: {path: work_path(@work), text: "Delete this work"}}}
 -# current_new_pathを使っているのはこのテンプレートをworkとtaskで共通化するため。workにいたらwork/new,taskならtask/new

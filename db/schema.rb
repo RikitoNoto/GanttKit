@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_141858) do
+ActiveRecord::Schema.define(version: 2020_05_03_104536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_141858) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "task_name_id", null: false
+    t.text "description"
     t.index ["task_name_id"], name: "index_tasks_on_task_name_id"
     t.index ["work_id"], name: "index_tasks_on_work_id"
   end
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_141858) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "display", default: true
+    t.text "description"
   end
 
   add_foreign_key "holidays", "user_options"

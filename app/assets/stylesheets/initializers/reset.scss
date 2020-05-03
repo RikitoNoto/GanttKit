@@ -108,6 +108,7 @@ input, select {
 
 button
 {
+    cursor: pointer;
     &:focus
     {
         outline: none;

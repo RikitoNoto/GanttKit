@@ -1,5 +1,10 @@
 .calendar_header
-  %p.calendar_header__title #{title}
+  %p.calendar_header__title
+    = title
+    -if description
+      %button.calendar_header__buttons__button.calendar_header__buttons__button--description{onclick: "DisplayDescription();"}
+        =icon('fas', 'file-alt', class: "calendar_header__buttons__button__icon")
+      = render partial: 'calendar/calendar_description', locals: {text: description}
   .calendar_header__buttons
     -# 以下選択url。部分テンプレート呼び出しでハッシュを入れることでよびだし。
     -# paths[アクション名][url]のような形で受け取るので呼び出したくないときは部分テンプレートで空のハッシュを入れないようにする。
