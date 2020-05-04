@@ -40,7 +40,7 @@ class TasksController < ApplicationController
     end
 
     def update
-        if @task.update_no_save(task_params) && @task.set_name(task_name_params)
+        if @task.update_no_save(task_params) && @task.set_name(task_name_params[:name])
             @task.save
             redirect_to user_task_path(current_user, @task)
         else
