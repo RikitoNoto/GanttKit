@@ -73,6 +73,16 @@ $form_label_width: 150px;
   }
 }
 
+@mixin none_scroll_bar()
+{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar
+  {
+    display: none;
+  }
+}
+
 @mixin hover_button($color: #0F1220)
 {
   &:hover
