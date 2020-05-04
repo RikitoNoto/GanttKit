@@ -44,6 +44,7 @@ class TasksController < ApplicationController
             @task.save
             redirect_to user_task_path(current_user, @task)
         else
+            @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
             render :edit
         end
     end
