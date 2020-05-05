@@ -90,10 +90,7 @@
             {
                 padding-top: 10px;
                 height: $height * 4;
-                min-height: $height * 4;
-                max-height: $height * 4;
-                min-width: $width;
-                max-width: $width;
+                resize: none;
             }
             &--quantity
             {
