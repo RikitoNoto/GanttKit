@@ -11,6 +11,7 @@ class TasksController < ApplicationController
                 @tasks = @user.tasks.where(work_id: params[:work_id]).includes(:progresses, :plans)
             end
             format.json do
+                #planとprogressのworkを選択したときに実行
                 @tasks = @work.tasks
             end
         end
@@ -27,11 +28,12 @@ class TasksController < ApplicationController
 
     def create
         @task = Task.new(task_params.merge(work_id: params[:work_id]))
-        if @task.valid? && @task.set_name(task_name_params[:name]) and @task.save#まずは@taskの確認。OKならnameをsave。その後taskの保存
+        if @task.valid? and @task.set_name(task_name_params[:name]) and @task.save#まずは@taskの確認。OKならnameをsave。その後taskの保存
+            @task.task_name.create_params(@task)#初期の機械学習用paramsを作成。taskのインスタンスを引数にする
             @task.users << current_user
             redirect_to user_work_tasks_path(current_user, @work)
         else
-            @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
+            set_data_list_for_task_form#入力補完用にユーザーの持っているtaskをすべて持ってくる
             render :new
         end
     end
@@ -44,7 +46,7 @@ class TasksController < ApplicationController
             @task.save
             redirect_to user_task_path(current_user, @task)
         else
-            @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
+            set_data_list_for_task_form#入力補完用にユーザーの持っているtaskをすべて持ってくる
             render :edit
         end
     end
@@ -67,6 +69,7 @@ class TasksController < ApplicationController
 
     def set_data_list_for_task_form
         @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
+        @units = Task.units.map{|task| task.unit}
     end
 
     def task_params

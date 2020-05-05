@@ -61,6 +61,12 @@ class Task < ApplicationRecord
     end
   end
 
+  def self.units
+    #taskで使用されているunitを取得
+    #task_formで予測変換するために使用する
+    Task.select(:unit).distinct
+  end
+
   private
 
 

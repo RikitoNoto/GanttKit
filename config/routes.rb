@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   resources :tasks, only: [ :destroy]
   resources :plans, only: [:new, :create]
   resources :progresses, only: [:new, :create]
+  resources :task_names, only: [:index]#機械学習用
   root to: "works#index"
 end

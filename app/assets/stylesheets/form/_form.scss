@@ -98,7 +98,7 @@
             }
             &--unit
             {
-                width: 50px;
+                width: 60px;
             }
             &--date
             {
@@ -127,6 +127,12 @@
         {
             margin: 40px auto;
             @include post_it($height: 50px);
+        }
+
+        &__button
+        {
+            border: none;
+            background-color: transparent;
         }
     }
 
