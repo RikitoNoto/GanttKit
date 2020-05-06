@@ -2,7 +2,7 @@
 = render "common/error_messages", resource: @task
 =form_with model: @task, url: url, local: true do |f|
     .form__field
-        =f.label :name, "TaskName：", class: "form__field__label"
+        =f.label :name, "TaskName：", class: "form__field__label", for: "task_name_for_js"
         =f.text_field :name, list: "taskNames", autocomplete: "off", placeholder: "Input the name of task", class: "form__field__input form__field__input--name", autofocus: true, id: "task_name_for_js"
         %datalist#taskNames
             -@tasks.each do |task|
@@ -13,18 +13,18 @@
         =f.text_area :description, class: "form__field__input form__field__input--description"
 
     .form__field
-        =f.label :quantity, "Quantity：", class: "form__field__label"
+        =f.label :quantity, "Quantity：", class: "form__field__label", for: "task_quantity_form_for_js"
         %span
-            =f.number_field :quantity, class: "form__field__input form__field__input--quantity"
+            =f.number_field :quantity, class: "form__field__input form__field__input--quantity", id: "task_quantity_form_for_js"
             =f.text_field :unit, list: "unitlist", title: "unit", class: "form__field__input form__field__input--unit"
             %datalist#unitlist
                 -@units.each do |unit|
                     %option{value: unit}
 
     .form__field
-        =f.label :time, "SpendTime：", class: "form__field__label"
+        =f.label :time, "SpendTime：", class: "form__field__label", for: "task_time_form_for_js"
         %span
-            =f.number_field :time, step: "0.01", class: "form__field__input form__field__input--time"
+            =f.number_field :time, step: "0.01", class: "form__field__input form__field__input--time", id: "task_time_form_for_js"
             H
             %button.form__field__button#task_machine_learning_button_for_js{type: "button", onclick: "GuessTime();"}
                 =icon('fas', 'brain', class: "calendar_header__buttons__button__icon")

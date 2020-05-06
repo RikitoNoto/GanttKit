@@ -68,7 +68,8 @@ class TasksController < ApplicationController
     end
 
     def set_data_list_for_task_form
-        @tasks = current_user.tasks#入力補完用にユーザーの持っているtaskをすべて持ってくる
+        @tasks = current_user.tasks.distinct(:name)#入力補完用にユーザーの持っているtaskをすべて持ってくる
+        #TODO: ここユニークにする
         @units = Task.units.map{|task| task.unit}
     end
 
