@@ -3,7 +3,7 @@ const TASK_QUANTITY_FORM = "task_quantity_form_for_js";//タスク量のフォ�
 const TASK_TIME_FORM = "task_time_form_for_js";//タスクのタイムフォーム
 const CALCULATE_MAX_COUNT = 1000;//計算の最大回数
 const CALCULATE_MIN_DIFF = 0;//ループを終了させるための誤差率の最小の差
-const H = 0.0000000000000000000001//学習率η
+const H = 0.00000000000000001//学習率η
 var params = [];//パラメータの配列
 var tasks = [];//サーバーから受け取るタスクの配列
 var name_id;
@@ -152,14 +152,14 @@ function CalculateTimeFromInputQuantity()
 {
     let task_quantity = document.getElementById(TASK_QUANTITY_FORM).value;
     let time = CalculateTaskTime(task_quantity);
-    document.getElementById(TASK_TIME_FORM).value = time;
+    document.getElementById(TASK_TIME_FORM).value = Math.floor(time * 100) / 100;
     SendParamsToServer();
 }
 
 //===================================
 
 //================4==================
-function SendParamsToServer();
+function SendParamsToServer()
 {   
     $.ajax({
         url: `/task_names/${name_id}/task_params`,
