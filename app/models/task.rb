@@ -22,8 +22,8 @@ class Task < ApplicationRecord
   end
 
 
-  def set_name(task_name)
-    self.task_name_id = TaskName.get_id(task_name)
+  def set_name(_name: nil, user: nil)
+    self.task_name_id = TaskName.get_id(_name: _name, user: user)
     return self.name
   end
 

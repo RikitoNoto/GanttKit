@@ -28,7 +28,7 @@ class TasksController < ApplicationController
 
     def create
         @task = Task.new(task_params.merge(work_id: params[:work_id]))
-        if @task.valid? and @task.set_name(task_name_params[:name]) and @task.save#まずは@taskの確認。OKならnameをsave。その後taskの保存
+        if @task.valid? and @task.set_name(_name: task_name_params[:name], user: current_user) and @task.save#まずは@taskの確認。OKならnameをsave。その後taskの保存
             @task.task_name.create_params(@task)#初期の機械学習用paramsを作成。taskのインスタンスを引数にする
             @task.users << current_user
             redirect_to user_work_tasks_path(current_user, @work)

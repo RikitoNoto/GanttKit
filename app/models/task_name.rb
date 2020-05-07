@@ -1,6 +1,7 @@
 class TaskName < ApplicationRecord
     has_many :tasks
     has_many :task_params
+    belongs_to :user
 
     validates :name, presence: true
     COUNT_TASK_PARAMS = 3#タスクのパラメータの個数
@@ -32,10 +33,10 @@ class TaskName < ApplicationRecord
         end
     end
 
-    def self.get_id(_name)
-        record = self.find_by(name: _name)
+    def self.get_id(_name: _name, user: nil)
+        record = self.find_by(name: _name, user: user)
         unless record
-            record = self.create(name: _name)
+            record = self.create(name: _name, user: user)
         end
         return record.id
     end

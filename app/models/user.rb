@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :tasks, through: :user_tasks
   has_many :plans
   has_many :progress
+  has_many :task_names, dependent: :destroy
   has_one :user_option, dependent: :destroy
   accepts_nested_attributes_for :user_option
 
