@@ -2,6 +2,7 @@ const TASK_NAME_FORM = "task_name_for_js";//タスクネームのフォーム
 const TASK_QUANTITY_FORM = "task_quantity_form_for_js";//タスク量のフォーム
 const TASK_TIME_FORM = "task_time_form_for_js";//タスクのタイムフォーム
 const DEBUG = false;//デバッグの画面を表示するかどうか
+const SAME_TIME_COUNT = 3;//何回同じ時間が出力されたら結果が安定したと考えるか。
 const CALCULATE_MAX_COUNT = 1000;//計算の最大回数
 const CALCULATE_MIN_DIFF = 0;//ループを終了させるための誤差率の最小の差
 const H = 0.00000000001//学習率η
@@ -66,15 +67,10 @@ function createParamsArray(paramsObj)//paramsの配列を引数にする
 //================2=================
 function CalculateTaskParams(resolve)
 {
-
-    for(let i = 0; i < CALCULATE_MAX_COUNT; i++)//定数CALCULATE_MAX_COUNTの回数だけループ
+    let time_array = [];
+    const quantity = document.getElementById(TASK_QUANTITY_FORM).value;
+    while(true)
     {
-        let E = CalculateErrorSum();//全体の誤差率の計算
-        if(E <= CALCULATE_MIN_DIFF)//誤差率が最小誤差率より小さければループを抜ける
-        {
-            break;
-        }
-
         let update_params = [];
         for( let j = 0; j < params.length; j++ )//パラメータの個数偏微分するので個数分ループする
         {
@@ -83,12 +79,33 @@ function CalculateTaskParams(resolve)
             update_params.push(param)
         }
         params = update_params;
-        if(DEBUG)
+        if(!CheckTimeIsChange(time_array, quantity))//計算結果の時間が履歴と比べて変化しているかどうかをチェック。変化していなければfalseが返る
         {
-            console.log(params);
+            break;
         }
+        // console.log(`${params} : ${CalculateSumFuncForDisplay(quantity)}`);
     }
     resolve();//ここに入れた引数がthenで呼ばれるメソッドの引数になる
+}
+
+function CheckTimeIsChange(time_array, quantity)
+{
+    if(time_array.length >= SAME_TIME_COUNT)
+    {
+        time_array.shift();
+    }
+    time_array.push(CalculateSumFuncForDisplay(quantity));
+
+    let time_change_flg = true;
+
+    for(let i = 0; i < time_array.length; i++)
+    {
+        if(i != 0 && time_array.length == SAME_TIME_COUNT && time_array.every(i => i == time_array[0]))
+        {
+            time_change_flg = false;
+        }
+    }
+    return time_change_flg;
 }
 
 function CalculateTaskTime(quantity)//パラメータをもとに時間を計算する関数
@@ -155,11 +172,15 @@ function CalculateSumFunc(roop_count)
 function CalculateTimeFromInputQuantity()
 {
     let task_quantity = document.getElementById(TASK_QUANTITY_FORM).value;
-    let time = CalculateTaskTime(task_quantity);
-    document.getElementById(TASK_TIME_FORM).value = Math.floor(time * 100) / 100;
+    document.getElementById(TASK_TIME_FORM).value = CalculateSumFuncForDisplay(task_quantity);
     SendParamsToServer();
 }
 
+function CalculateSumFuncForDisplay(quantity)
+{
+    let time = CalculateTaskTime(quantity);
+    return Math.floor(time * 100) / 100;
+}
 //===================================
 
 //================4==================
